@@ -1,0 +1,40 @@
+import Link from "next/link";
+
+import { siteConfig } from "@/lib/site";
+import { ButtonLink } from "@/components/ui/button-link";
+import { Container } from "@/components/ui/container";
+
+export function Header() {
+  return (
+    <header className="sticky top-0 z-30 border-b border-[#eeeeee] bg-white">
+      <Container className="flex h-16 items-center justify-between gap-4 sm:h-[4.5rem] sm:gap-6">
+        <Link
+          href="/"
+          className="shrink-0 text-base font-semibold tracking-tight text-ink-900 transition hover:text-brand-700 sm:text-lg"
+        >
+          Retrofit Planner
+        </Link>
+
+        <nav className="hidden items-center gap-8 md:flex">
+          {siteConfig.navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-[0.95rem] font-medium text-ink-600 underline-offset-8 transition hover:text-ink-900 hover:underline"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <ButtonLink
+          href="/planner"
+          size="sm"
+          className="rounded-xl px-4 shadow-none hover:translate-y-0 hover:shadow-none hover:bg-[#ea580c] sm:px-5"
+        >
+          Start planner
+        </ButtonLink>
+      </Container>
+    </header>
+  );
+}

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* Shared surface tokens — flat white surfaces, ink borders */
+  --page-bg: #ffffff;
+  --card-bg: #ffffff;
+  --border-subtle: #e8e2da;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink-900 antialiased;
+  background-color: var(--page-bg);
+}
+
+a {
+  @apply underline-offset-4;
+}
+
+::selection {
+  @apply bg-teal-100 text-ink-900;
+}
