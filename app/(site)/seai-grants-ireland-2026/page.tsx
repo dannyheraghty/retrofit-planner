@@ -1,10 +1,10 @@
 import Link from "next/link";
 
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
 import { PillarPageHero } from "@/components/seo/pillar-page-hero";
 import { PillarPageTealCta } from "@/components/seo/pillar-page-cta";
 import { RelatedGuides } from "@/components/seo/related-guides";
-import { ButtonLink } from "@/components/ui/button-link";
 import { Card } from "@/components/ui/card";
 import { FaqItem } from "@/components/ui/faq-item";
 import { Section } from "@/components/ui/section";
@@ -286,9 +286,9 @@ export default function SeaiGrantsIreland2026Page() {
               See possible grants, upgrade paths, and practical actions for your home in one place.
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
-              <ButtonLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
+              <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
                 Start planner
-              </ButtonLink>
+              </StartPlannerLink>
             </div>
           </div>
         </Reveal>

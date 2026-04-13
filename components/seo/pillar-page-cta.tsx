@@ -1,3 +1,4 @@
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
 
@@ -27,12 +28,21 @@ export function PillarPageTealCta({
               </h2>
               <p className="mt-4 text-base leading-7 text-white/85 sm:text-lg">{body}</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-                <ButtonLink
-                  href={buttonHref}
-                  className="w-full justify-center sm:w-auto sm:min-w-[12rem]"
-                >
-                  {buttonLabel}
-                </ButtonLink>
+                {buttonLabel === "Start planner" ? (
+                  <StartPlannerLink
+                    href={buttonHref}
+                    className="w-full justify-center sm:w-auto sm:min-w-[12rem]"
+                  >
+                    {buttonLabel}
+                  </StartPlannerLink>
+                ) : (
+                  <ButtonLink
+                    href={buttonHref}
+                    className="w-full justify-center sm:w-auto sm:min-w-[12rem]"
+                  >
+                    {buttonLabel}
+                  </ButtonLink>
+                )}
               </div>
               {reassurance ? (
                 <p className="mt-4 text-sm leading-6 text-white/75">{reassurance}</p>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
 import { PillarPageHero } from "@/components/seo/pillar-page-hero";
 import { PillarPageTealCta } from "@/components/seo/pillar-page-cta";
 import { RelatedGuides } from "@/components/seo/related-guides";
-import { ButtonLink } from "@/components/ui/button-link";
 import { Card } from "@/components/ui/card";
 import { FaqItem } from "@/components/ui/faq-item";
 import { Section } from "@/components/ui/section";
@@ -229,9 +229,9 @@ export default function WindowsDoorsGrantsIrelandPage() {
               Use the planner to see possible grants, upgrade paths, and practical next steps for your home.
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
-              <ButtonLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
+              <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
                 Start planner
-              </ButtonLink>
+              </StartPlannerLink>
             </div>
           </div>
         </Reveal>

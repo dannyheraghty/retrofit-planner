@@ -1,7 +1,7 @@
 import Link from "next/link";
 
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { siteConfig } from "@/lib/site";
-import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 
 export function Header() {
@@ -27,13 +27,13 @@ export function Header() {
           ))}
         </nav>
 
-        <ButtonLink
+        <StartPlannerLink
           href="/planner"
           size="sm"
           className="rounded-xl px-4 shadow-none hover:translate-y-0 hover:shadow-none hover:bg-[#ea580c] sm:px-5"
         >
           Start planner
-        </ButtonLink>
+        </StartPlannerLink>
       </Container>
     </header>
   );

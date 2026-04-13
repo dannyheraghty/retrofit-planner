@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ButtonLink } from "@/components/ui/button-link";
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Card } from "@/components/ui/card";
 import { FaqItem } from "@/components/ui/faq-item";
 import { Section } from "@/components/ui/section";
@@ -197,9 +197,9 @@ export default function HowItWorksPage() {
               oriented before speaking to a professional or reviewing official
               requirements in detail.
             </p>
-            <ButtonLink href="/planner" size="md">
+            <StartPlannerLink href="/planner" size="md">
               Start planner
-            </ButtonLink>
+            </StartPlannerLink>
           </div>
         </Card>
       </Section>

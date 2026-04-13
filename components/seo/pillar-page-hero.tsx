@@ -1,5 +1,5 @@
+import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
-import { ButtonLink } from "@/components/ui/button-link";
 
 type PillarPageHeroProps = {
   eyebrow: string;
@@ -29,13 +29,13 @@ export function PillarPageHero({
               {intro}
             </p>
             <div className="mx-auto mt-6 flex w-full max-w-xl justify-center sm:mx-0 sm:justify-start">
-              <ButtonLink
+              <StartPlannerLink
                 href="/planner"
                 size="lg"
                 className="w-full justify-center max-sm:h-14 max-sm:px-7 max-sm:text-base sm:h-14 sm:w-full sm:px-14 sm:text-base"
               >
                 Start planner
-              </ButtonLink>
+              </StartPlannerLink>
             </div>
           </Reveal>
 

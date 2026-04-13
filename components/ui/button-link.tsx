@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -9,6 +9,7 @@ type ButtonLinkProps = {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 const variantClasses = {
@@ -31,11 +32,13 @@ export function ButtonLink({
   children,
   variant = "primary",
   size = "md",
-  className
+  className,
+  onClick
 }: ButtonLinkProps) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         "inline-flex items-center justify-center rounded-[0.95rem] transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variantClasses[variant],
