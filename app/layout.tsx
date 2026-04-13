@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { defaultMetadata } from "@/lib/site";
 
 import "./globals.css";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en-IE" className={inter.variable}>
       <body className="min-h-screen bg-white font-sans text-ink-900">
         {children}
+        <GoogleAnalytics measurementId="G-51KS40SZ3J" />
       </body>
     </html>
   );
