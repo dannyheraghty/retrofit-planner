@@ -1,6 +1,13 @@
 "use client";
 
 import type { Dispatch, SetStateAction } from "react";
+import {
+  DoorOpen,
+  Flame,
+  House,
+  Layers,
+  Sun
+} from "lucide-react";
 
 import {
   IRISH_COUNTIES,
@@ -10,10 +17,9 @@ import {
 import {
   buildFullRetrofitPlan,
   buildPartialPreview,
-  indicativeGrantShortLine,
+  grantCapEuro,
   type PreviewUpgradeCard
 } from "@/lib/planner/partial-preview";
-import { labelHeating, labelYearBand } from "@/lib/planner/labels";
 import { moveWithinSixMonthsFromTimeline } from "@/lib/planner/timeline-compat";
 import type {
   PlannerAnswers,
@@ -701,67 +707,103 @@ export function StepIntentReadiness({ answers, setAnswers }: PlannerPanelProps) 
   );
 }
 
-/**
- * Step 5 preview only — short, soft lines. Classification comes from the engine (which bucket
- * the card is in); this does not re-run eligibility logic.
- */
-function step5CardPreviewSummary(
-  id: UpgradeInterestId,
-  answers: PlannerAnswers,
-  bucket: "suit" | "assess"
-): string {
-  const heat = labelHeating(answers.heating);
-  const age = labelYearBand(answers.yearBuiltBand);
+function step5SupportLine(id: UpgradeInterestId, propertyType: PropertyType): string {
+  const cap = grantCapEuro(id, propertyType);
+  if (cap > 0) return `Up to €${cap.toLocaleString("en-IE")} support`;
+  if (id === "full_retrofit") return "Staged grant support";
+  return "Support details in full plan";
+}
 
+function step5CardIcon(id: UpgradeInterestId) {
+  const className = "h-4 w-4 text-teal-700";
   switch (id) {
-    case "heat_pump":
-      return bucket === "suit"
-        ? `Given you heat with ${heat}, a heat pump may suit exploring — fabric and survey still matter.`
-        : "May be worth exploring, but often depends on fabric, BER, and assessment first.";
     case "solar_pv":
-      return "May suit once roof and electrical details are checked — indicative only, not a decision.";
-    case "attic_insulation":
-      return bucket === "suit"
-        ? `Often a practical early upgrade for a ${age} home like yours — subject to survey.`
-        : "May still help, but ventilation, depth, or prior work may require assessment first.";
+      return <Sun aria-hidden className={className} />;
+    case "heat_pump":
+      return <Flame aria-hidden className={className} />;
     case "wall_insulation":
-      return bucket === "suit"
-        ? "May suit once wall type is clearer — survey usually pins down what’s realistic."
-        : "May qualify for support, but wall build-up almost always needs assessment first.";
+      return <House aria-hidden className={className} />;
+    case "attic_insulation":
+      return <Layers aria-hidden className={className} />;
     case "windows_doors":
-      return bucket === "suit"
-        ? "May suit where comfort, glazing, or BER improvements are being explored — caps depend on home type."
-        : "May require assessment first to line up comfort goals with programme rules for your home.";
+      return <DoorOpen aria-hidden className={className} />;
     case "full_retrofit":
-      return "Whole-home retrofit may suit staged planning — sequencing often needs professional input first.";
-    case "not_sure":
     default:
-      return "May suit narrowing options with your answers — your full plan adds more detail.";
+      return <House aria-hidden className={className} />;
   }
 }
 
 function PreviewUpgradeTeaserCard({
   card,
-  answers,
   bucket,
   propertyType
 }: {
   card: PreviewUpgradeCard;
-  answers: PlannerAnswers;
   bucket: "suit" | "assess";
   propertyType: PropertyType;
 }) {
-  const shortGrant = indicativeGrantShortLine(card.id, propertyType);
-  const summary = step5CardPreviewSummary(card.id, answers, bucket);
+  const shortGrant = step5SupportLine(card.id, propertyType);
+  const tag = bucket === "assess" ? "Needs assessment first" : "May suit your home now";
   return (
-    <div className="rounded-lg border border-ink-100 bg-white/70 px-3 py-3 shadow-none sm:rounded-xl">
-      <h3 className="text-sm font-semibold text-ink-900">{card.title}</h3>
-      <p className="mt-1.5 text-sm leading-snug text-ink-600">{summary}</p>
-      {shortGrant ? (
-        <p className="mt-2 border-t border-ink-100/80 pt-2 text-xs font-medium leading-snug text-teal-800">
-          {shortGrant}
-        </p>
-      ) : null}
+    <div className="rounded-xl border border-ink-200 bg-white px-4 py-3.5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="rounded-lg border border-teal-100/90 bg-teal-50/80 p-2">
+            {step5CardIcon(card.id)}
+          </span>
+          <h3 className="truncate text-sm font-semibold text-ink-900">{card.title}</h3>
+        </div>
+        <span
+          className={cn(
+            "shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold",
+            bucket === "suit"
+              ? "bg-teal-50 text-teal-800"
+              : "bg-amber-50 text-amber-800"
+          )}
+        >
+          {tag}
+        </span>
+      </div>
+      <p className="mt-1.5 text-sm font-semibold leading-snug text-ink-900">{shortGrant}</p>
+    </div>
+  );
+}
+
+function formatSupportRangeText(minEuro: number, maxEuro: number): string {
+  if (maxEuro <= 0) return "Set after selecting measures";
+  const min = `€${minEuro.toLocaleString("en-IE")}`;
+  const max = `€${maxEuro.toLocaleString("en-IE")}`;
+  return minEuro === maxEuro ? min : `${min} - ${max}`;
+}
+
+function step5LikelyNextStep(preview: ReturnType<typeof buildPartialPreview>): string {
+  if (preview.assessFirst.length > 0) return "Preparation or assessment";
+  if (preview.maySuit.length > 0) return "Compare your top options";
+  return "Pick one measure to start";
+}
+
+function Step5SummaryStat({
+  label,
+  value
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-xl border-2 border-black bg-teal-600 px-4 py-3 shadow-[0_8px_18px_rgba(0,0,0,0.12)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.16)]">
+      <p className="text-xs font-semibold text-white">{label}</p>
+      <p className="mt-1 text-sm font-bold leading-snug text-white">{value}</p>
+    </div>
+  );
+}
+
+function SectionTitle({ id, title, note }: { id: string; title: string; note?: string }) {
+  return (
+    <div className="space-y-1.5">
+      <h2 id={id} className="text-base font-semibold text-ink-900">
+        {title}
+      </h2>
+      {note ? <p className="text-xs leading-snug text-ink-500">{note}</p> : null}
     </div>
   );
 }
@@ -769,41 +811,39 @@ function PreviewUpgradeTeaserCard({
 export function StepPartialResult({ answers }: PlannerPanelProps) {
   const meta = PLANNER_STEPS[4];
   const preview = buildPartialPreview(answers);
+  const fullPlan = buildFullRetrofitPlan(answers);
+  const startMeasure =
+    preview.maySuit[0]?.title || preview.assessFirst[0]?.title || "BER or home assessment";
+  const supportRange = formatSupportRangeText(
+    fullPlan.grantRange.minEuro,
+    fullPlan.grantRange.maxEuro
+  );
+  const likelyNext = step5LikelyNextStep(preview);
 
   return (
     <PlannerStepFrame
       title={meta.title}
-      description={
-        <>
-          <p>{meta.description}</p>
-          <p className="text-ink-600">This is guidance, not a grant decision.</p>
-        </>
-      }
+      description={<p>You’re almost done — here’s your snapshot.</p>}
     >
-      <div className="space-y-6 rounded-2xl border border-teal-200 bg-teal-50/50 p-5 sm:p-6">
-        <div className="rounded-lg border border-ink-200/80 bg-white/90 px-3.5 py-2.5 sm:rounded-xl sm:px-4 sm:py-3">
-          <p className="text-sm leading-snug text-ink-800">{preview.readinessSignal}</p>
-        </div>
+      <div className="space-y-6">
+        <section className="space-y-3" aria-labelledby="preview-snapshot-heading">
+          <SectionTitle id="preview-snapshot-heading" title="Summary snapshot" />
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Step5SummaryStat label="Best place to start" value={startMeasure} />
+            <Step5SummaryStat label="Estimated support" value={supportRange} />
+            <Step5SummaryStat label="What to do next" value={likelyNext} />
+          </div>
+        </section>
 
         {!preview.isNotSureOnly ? (
           <>
             {preview.maySuit.length > 0 ? (
-              <section className="space-y-2.5" aria-labelledby="preview-suit-heading">
-                <h2
-                  id="preview-suit-heading"
-                  className="text-sm font-semibold text-ink-900"
-                >
-                  Upgrades that may suit this home sooner
-                </h2>
-                <p className="text-xs text-ink-600">
-                  Indicative only — depends on survey and programme rules.
-                </p>
-                <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+              <section className="space-y-3" aria-label="May suit cards">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {preview.maySuit.map((card) => (
                     <PreviewUpgradeTeaserCard
                       key={card.id}
                       card={card}
-                      answers={answers}
                       bucket="suit"
                       propertyType={answers.propertyType}
                     />
@@ -813,22 +853,12 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
             ) : null}
 
             {preview.assessFirst.length > 0 ? (
-              <section className="space-y-2.5" aria-labelledby="preview-assess-heading">
-                <h2
-                  id="preview-assess-heading"
-                  className="text-sm font-semibold text-ink-900"
-                >
-                  Upgrades that may require assessment or preparation first
-                </h2>
-                <p className="text-xs text-ink-600">
-                  Often needs clarity on wall type, BER, fabric, or sequencing before support is knowable.
-                </p>
-                <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+              <section className="space-y-3" aria-label="Needs assessment cards">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {preview.assessFirst.map((card) => (
                     <PreviewUpgradeTeaserCard
                       key={card.id}
                       card={card}
-                      answers={answers}
                       bucket="assess"
                       propertyType={answers.propertyType}
                     />
@@ -838,23 +868,35 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
             ) : null}
           </>
         ) : (
-          <p className="text-sm leading-snug text-ink-700">
-            You haven’t chosen specific measures yet — add interests on an earlier step for
-            tailored preview cards. You can still unlock the full plan when you’re ready.
-          </p>
+          <section
+            className="rounded-xl border border-ink-200 bg-white px-4 py-4 shadow-sm"
+            aria-labelledby="preview-next-pick-heading"
+          >
+            <SectionTitle
+              id="preview-next-pick-heading"
+              title="May suit your home now"
+              note="Pick one or two measures to unlock this preview section."
+            />
+          </section>
         )}
 
-        <div className="rounded-xl border-2 border-teal-500/35 bg-teal-50/90 px-4 py-4 shadow-sm ring-1 ring-teal-700/10 sm:px-5 sm:py-5">
-          <p className="text-base font-semibold text-ink-900">Unlock your full plan to see:</p>
-          <ul className="mt-2.5 list-inside list-disc space-y-1.5 text-sm font-medium text-ink-800 marker:text-teal-600">
-            <li>Clearer next steps</li>
+        <section
+          className="rounded-2xl border-2 border-black bg-white px-5 py-5 text-ink-900 shadow-[0_10px_24px_rgba(0,0,0,0.1)]"
+          aria-labelledby="preview-unlock-heading"
+        >
+          <h2 id="preview-unlock-heading" className="text-lg font-semibold text-ink-900">
+            See your full retrofit plan
+          </h2>
+          <ul className="mt-3 list-inside list-disc space-y-1.5 text-sm font-medium text-ink-800 marker:text-ink-800">
+            <li>Clearer next steps for your home</li>
             <li>Recommended upgrade order</li>
-            <li>A fuller breakdown of what may suit and what to assess first</li>
+            <li>Full grant breakdown</li>
+            <li>Avoid costly upgrade mistakes</li>
           </ul>
-        </div>
+        </section>
 
-        <p className="text-center text-xs leading-snug text-ink-500">
-          Not an official grant decision — eligibility may require assessment first.
+        <p className="text-center text-xs font-medium leading-snug text-ink-500">
+          Get your personalised retrofit plan in seconds
         </p>
       </div>
     </PlannerStepFrame>

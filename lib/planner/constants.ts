@@ -36,9 +36,8 @@ export const PLANNER_STEPS: PlannerStepMeta[] = [
   {
     id: "partial",
     label: "Preview",
-    title: "Early ideas for your home",
-    description:
-      "Here’s a quick preview of what may suit your home — based on your answers."
+    title: "Your home snapshot",
+    description: "A quick preview of what may suit your home."
   },
   {
     id: "lead",

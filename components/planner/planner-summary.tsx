@@ -37,7 +37,7 @@ export function PlannerSummary({
     currentStep >= 6
       ? "Full plan unlocked (mock)"
       : currentStep === 5
-        ? "Add your details to unlock the full plan"
+        ? "Preview snapshot ready - unlock full plan next"
         : currentStep >= 4
           ? "Preview — fuller detail after you unlock"
           : "In progress";
@@ -67,7 +67,14 @@ export function PlannerSummary({
             value={labelUpgradeInterests(answers.upgradeInterests)}
           />
         </dl>
-        <p className="mt-5 rounded-xl bg-ink-100 px-3 py-2 text-xs font-medium text-ink-700">
+        <p
+          className={cn(
+            "mt-5 rounded-xl px-3 py-2 text-xs font-medium",
+            currentStep === 5
+              ? "border border-teal-200 bg-teal-50 text-teal-800"
+              : "bg-ink-100 text-ink-700"
+          )}
+        >
           {gated}
         </p>
       </Card>

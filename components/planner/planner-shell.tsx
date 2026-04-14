@@ -44,7 +44,7 @@ export function PlannerShell() {
   const Panel = PLANNER_STEP_PANELS[step];
   const showNext = step < LAST_STEP;
   const nextLabel =
-    step === 4 ? "Continue to unlock your plan" : step === 5 ? "Unlock full plan" : "Continue";
+    step === 4 ? "See my full plan" : step === 5 ? "Unlock full plan" : "Continue";
 
   return (
     <div
