@@ -10,7 +10,6 @@ import { validatePlannerStep } from "@/lib/planner/validation";
 import { PlannerInlineError } from "@/components/planner/planner-field";
 import { PLANNER_STEP_PANELS } from "@/components/planner/planner-step-panels";
 import { PlannerStepper } from "@/components/planner/planner-stepper";
-import { PlannerSummary } from "@/components/planner/planner-summary";
 import { cn } from "@/lib/utils";
 
 const LAST_STEP = PLANNER_STEP_PANELS.length - 1;
@@ -66,8 +65,13 @@ export function PlannerShell() {
           </div>
         ) : null}
 
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
-          <div className="min-w-0 flex-1 space-y-6">
+        <div
+          className={cn(
+            "flex flex-col gap-6",
+            "mx-auto w-full max-w-4xl"
+          )}
+        >
+          <div className="min-w-0 w-full space-y-6">
             <Card
               className={cn(
                 "p-4 sm:p-6 lg:p-6",
@@ -118,14 +122,6 @@ export function PlannerShell() {
               </div>
             </Card>
           </div>
-
-          {step < LAST_STEP ? (
-            <PlannerSummary
-              answers={answers}
-              currentStep={step}
-              className="w-full shrink-0 lg:sticky lg:top-24 lg:max-w-sm"
-            />
-          ) : null}
         </div>
       </Container>
     </div>

@@ -2,10 +2,21 @@
 
 import type { Dispatch, SetStateAction } from "react";
 import {
+  ArrowRight,
+  Building,
+  Building2,
+  Check,
+  CircleHelp,
+  Clock3,
   DoorOpen,
+  Euro,
   Flame,
+  Home,
   House,
   Layers,
+  MessageCircleMore,
+  Route,
+  Wrench,
   Sun
 } from "lucide-react";
 
@@ -137,6 +148,16 @@ const PREVIOUS_UPGRADE_OPTIONS = [
   { id: "none_yet" as const, label: "None of these yet" }
 ] as const;
 
+const PREVIOUS_UPGRADE_CARD_ICONS: Record<PreviousUpgradeId, CardIcon> = {
+  attic: Layers,
+  windows: DoorOpen,
+  wall: House,
+  heat_pump: Flame,
+  solar: Sun,
+  heating_upgrade: Wrench,
+  none_yet: CircleHelp
+};
+
 const TIMELINE_OPTIONS = [
   {
     value: "asap",
@@ -200,113 +221,307 @@ function selectClassName() {
   );
 }
 
+type CardIcon = typeof House;
+
+type PlannerChoiceOption<T extends string> = {
+  value: T;
+  label: string;
+  Icon: CardIcon;
+};
+
+function PlannerSingleSelectCard<T extends string>({
+  id,
+  name,
+  option,
+  selected,
+  onSelect
+}: {
+  id: string;
+  name: string;
+  option: PlannerChoiceOption<T>;
+  selected: boolean;
+  onSelect: (value: T) => void;
+}) {
+  const Icon = option.Icon;
+  return (
+    <label
+      htmlFor={id}
+      className={cn(
+        "flex h-full cursor-pointer items-center gap-3 rounded-xl border bg-white px-3.5 py-3 text-sm font-medium text-ink-800 shadow-sm transition",
+        "hover:border-teal-300 hover:shadow",
+        "focus-within:ring-2 focus-within:ring-teal-300 focus-within:ring-offset-2",
+        selected
+          ? "border-teal-600 bg-teal-50 text-ink-900 shadow-md"
+          : "border-ink-200"
+      )}
+    >
+      <input
+        id={id}
+        name={name}
+        type="radio"
+        className="peer sr-only"
+        checked={selected}
+        onChange={() => onSelect(option.value)}
+      />
+      <span
+        className={cn(
+          "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border bg-white",
+          selected ? "border-teal-200 text-teal-700" : "border-ink-200 text-ink-500"
+        )}
+      >
+        <Icon aria-hidden className="h-4 w-4" />
+      </span>
+      <span>{option.label}</span>
+    </label>
+  );
+}
+
+function PlannerMultiSelectCard<T extends string>({
+  id,
+  option,
+  selected,
+  disabled,
+  onToggle,
+  showSelectedCheck = false,
+  className
+}: {
+  id: string;
+  option: PlannerChoiceOption<T>;
+  selected: boolean;
+  disabled?: boolean;
+  onToggle: (value: T) => void;
+  showSelectedCheck?: boolean;
+  className?: string;
+}) {
+  const Icon = option.Icon;
+  return (
+    <label
+      htmlFor={id}
+      className={cn(
+        "relative flex items-center gap-3 rounded-xl border bg-white px-3.5 py-3 text-sm font-medium text-ink-800 shadow-sm transition duration-150",
+        disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:border-teal-300 hover:shadow",
+        "focus-within:ring-2 focus-within:ring-teal-300 focus-within:ring-offset-2",
+        selected
+          ? "border-2 border-teal-600 bg-teal-50/80 text-ink-900 shadow-md"
+          : "border-ink-200",
+        selected && !disabled && "scale-[1.01]",
+        className
+      )}
+    >
+      <input
+        id={id}
+        type="checkbox"
+        className="peer sr-only"
+        checked={selected}
+        disabled={disabled}
+        onChange={() => onToggle(option.value)}
+      />
+      {showSelectedCheck ? (
+        <span
+          className={cn(
+            "absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full border text-[11px] transition-opacity duration-150",
+            selected
+              ? "border-teal-700 bg-teal-700 text-white opacity-100"
+              : "border-ink-300 bg-white text-ink-500 opacity-80"
+          )}
+          aria-hidden
+        >
+          <Check className="h-3.5 w-3.5" />
+        </span>
+      ) : null}
+      <span
+        className={cn(
+          "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border bg-white",
+          selected ? "border-teal-200 text-teal-700" : "border-ink-200 text-ink-500"
+        )}
+      >
+        <Icon aria-hidden className="h-4 w-4" />
+      </span>
+      <span>{option.label}</span>
+    </label>
+  );
+}
+
+const PROPERTY_TYPE_CARD_OPTIONS: PlannerChoiceOption<PropertyType>[] = [
+  { value: "detached", label: "Detached house", Icon: House },
+  { value: "semi_detached", label: "Semi-detached house", Icon: Home },
+  { value: "terraced", label: "Terraced / townhouse", Icon: Building2 },
+  { value: "apartment", label: "Apartment / duplex", Icon: Building },
+  { value: "other_or_unsure", label: "Other / not sure", Icon: CircleHelp }
+];
+
+const UPGRADE_INTEREST_CARD_ICONS: Record<UpgradeInterestId, CardIcon> = {
+  heat_pump: Flame,
+  attic_insulation: Layers,
+  wall_insulation: House,
+  windows_doors: DoorOpen,
+  solar_pv: Sun,
+  full_retrofit: Wrench,
+  not_sure: CircleHelp
+};
+
+const TIMELINE_CARD_ICONS: Record<(typeof TIMELINE_OPTIONS)[number]["value"], CardIcon> = {
+  asap: Clock3,
+  six_months: Clock3,
+  one_year: Clock3,
+  researching: Clock3
+};
+
+const QUOTES_INSTALLER_CARD_ICONS: Record<
+  (typeof QUOTES_INSTALLER_OPTIONS)[number]["value"],
+  CardIcon
+> = {
+  none: MessageCircleMore,
+  informal: MessageCircleMore,
+  one_quote: MessageCircleMore,
+  several_quotes: MessageCircleMore,
+  planning: MessageCircleMore
+};
+
+const BUDGET_CARD_ICONS: Record<(typeof BUDGET_OPTIONS)[number]["value"], CardIcon> = {
+  under_5k: Euro,
+  "5k_15k": Euro,
+  "15k_40k": Euro,
+  "40k_plus": Euro,
+  unsure: Euro
+};
+
+const NEXT_STEP_PREFERENCE_CARD_ICONS: Record<
+  (typeof NEXT_STEP_PREFERENCE_OPTIONS)[number]["value"],
+  CardIcon
+> = {
+  yes: Route,
+  maybe: ArrowRight,
+  no: CircleHelp
+};
+
 export function StepPropertyProfile({ answers, setAnswers }: PlannerPanelProps) {
   const meta = PLANNER_STEPS[0];
+  const hasPropertyType = Boolean(answers.propertyType);
+  const hasCounty = Boolean(answers.county);
+  const hasYearBuilt = Boolean(answers.yearBuiltBand);
+  const revealClass = (isVisible: boolean) =>
+    cn(
+      "overflow-hidden transition-all duration-200 ease-out",
+      isVisible
+        ? "max-h-[220px] translate-y-0 opacity-100"
+        : "max-h-0 -translate-y-1 opacity-0"
+    );
+
   return (
     <PlannerStepFrame title={meta.title} description={meta.description} compact>
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-4">
-        <PlannerField
-          label="Type of home"
-          htmlFor="property-type"
-          hint="Choose the closest match — apartments and houses follow different grant caps for some measures."
-          required
-        >
-          <select
-            id="property-type"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.propertyType}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                propertyType: e.target.value as PropertyType
-              }))
-            }
+      <div className="space-y-6">
+        <div className="space-y-5">
+          <PlannerField
+            label="What type of home do you have?"
+            htmlFor="property-type-detached"
+            hint="Choose the closest match — apartments and houses follow different grant caps for some measures."
+            required
           >
-            <option value="">Choose…</option>
-            <option value="detached">Detached house</option>
-            <option value="semi_detached">Semi-detached house</option>
-            <option value="terraced">Terraced / townhouse</option>
-            <option value="apartment">Apartment / duplex</option>
-            <option value="other_or_unsure">Other / not sure</option>
-          </select>
-        </PlannerField>
+            <div
+              id="property-type"
+              role="radiogroup"
+              aria-label="What type of home do you have?"
+              className="grid gap-3 sm:grid-cols-2 sm:gap-3.5"
+            >
+              {PROPERTY_TYPE_CARD_OPTIONS.map((option) => (
+                <PlannerSingleSelectCard
+                  key={option.value}
+                  id={`property-type-${option.value}`}
+                  name="property-type"
+                  option={option}
+                  selected={answers.propertyType === option.value}
+                  onSelect={(propertyType) => setAnswers((a) => ({ ...a, propertyType }))}
+                />
+              ))}
+            </div>
+          </PlannerField>
 
-        <PlannerField
-          label="County"
-          htmlFor="county"
-          hint="Grants are national; we only use this for local context later."
-          required
-        >
-          <select
-            id="county"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.county}
-            onChange={(e) => setAnswers((a) => ({ ...a, county: e.target.value }))}
-          >
-            <option value="">Choose…</option>
-            {IRISH_COUNTIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
+          <div className={revealClass(hasPropertyType)} aria-hidden={!hasPropertyType}>
+            <PlannerField
+              label="County"
+              htmlFor="county"
+              hint="Grants are national; we only use this for local context later."
+              required
+            >
+              <select
+                id="county"
+                disabled={!hasPropertyType}
+                className={cn(selectClassName(), !hasPropertyType && "pointer-events-none")}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.county}
+                onChange={(e) => setAnswers((a) => ({ ...a, county: e.target.value }))}
+              >
+                <option value="">Choose…</option>
+                {IRISH_COUNTIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </PlannerField>
+          </div>
 
-        <PlannerField
-          label="When was your home built?"
-          htmlFor="year-band"
-          hint="Pick the era that best matches — exact year is not needed."
-          required
-        >
-          <select
-            id="year-band"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.yearBuiltBand}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                yearBuiltBand: e.target.value as YearBuiltBand
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            <option value="pre_1919">Built before 1919</option>
-            <option value="1919_1945">1919–1945</option>
-            <option value="1946_1960">1946–1960</option>
-            <option value="1961_1980">1961–1980</option>
-            <option value="1981_2000">1981–2000</option>
-            <option value="2001_2010">2001–2010</option>
-            <option value="2011_newer">2011 or newer</option>
-          </select>
-        </PlannerField>
+          <div className={revealClass(hasCounty)} aria-hidden={!hasCounty}>
+            <PlannerField
+              label="When was your home built?"
+              htmlFor="year-band"
+              hint="Pick the era that best matches — exact year is not needed."
+              required
+            >
+              <select
+                id="year-band"
+                disabled={!hasCounty}
+                className={cn(selectClassName(), !hasCounty && "pointer-events-none")}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.yearBuiltBand}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    yearBuiltBand: e.target.value as YearBuiltBand
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                <option value="pre_1919">Built before 1919</option>
+                <option value="1919_1945">1919–1945</option>
+                <option value="1946_1960">1946–1960</option>
+                <option value="1961_1980">1961–1980</option>
+                <option value="1981_2000">1981–2000</option>
+                <option value="2001_2010">2001–2010</option>
+                <option value="2011_newer">2011 or newer</option>
+              </select>
+            </PlannerField>
+          </div>
 
-        <PlannerField
-          label="What best describes your situation?"
-          htmlFor="homeowner"
-          hint="Some supports differ depending on how the home is used."
-          required
-        >
-          <select
-            id="homeowner"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.homeownerStatus}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                homeownerStatus: e.target.value as PlannerAnswers["homeownerStatus"]
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            <option value="owner_occupier">I live in the home (owner-occupier)</option>
-            <option value="landlord">I rent it out to tenants</option>
-            <option value="other">Other / not sure</option>
-          </select>
-        </PlannerField>
+          <div className={revealClass(hasYearBuilt)} aria-hidden={!hasYearBuilt}>
+            <PlannerField
+              label="What best describes your situation?"
+              htmlFor="homeowner"
+              hint="Some supports differ depending on how the home is used."
+              required
+            >
+              <select
+                id="homeowner"
+                disabled={!hasYearBuilt}
+                className={cn(selectClassName(), !hasYearBuilt && "pointer-events-none")}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.homeownerStatus}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    homeownerStatus: e.target.value as PlannerAnswers["homeownerStatus"]
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                <option value="owner_occupier">I live in the home (owner-occupier)</option>
+                <option value="landlord">I rent it out to tenants</option>
+                <option value="other">Other / not sure</option>
+              </select>
+            </PlannerField>
+          </div>
+        </div>
       </div>
     </PlannerStepFrame>
   );
@@ -317,6 +532,17 @@ export function StepCurrentHome({ answers, setAnswers }: PlannerPanelProps) {
   const showBerBand = answers.berStatus === "know_band";
   const hasNoneYet = answers.previousUpgrades.includes("none_yet");
   const hasOtherPrev = answers.previousUpgrades.some((x) => x !== "none_yet");
+  const hasHeatingAndBerStatus = Boolean(answers.heating) && Boolean(answers.berStatus);
+  const sectionAComplete =
+    hasHeatingAndBerStatus && (!showBerBand || Boolean(answers.berRatingBand));
+  const showFabricSection = sectionAComplete;
+  const revealClass = (isVisible: boolean) =>
+    cn(
+      "overflow-hidden transition-all duration-300 ease-out",
+      isVisible
+        ? "max-h-[1200px] translate-y-0 opacity-100"
+        : "max-h-0 -translate-y-1.5 opacity-0"
+    );
 
   const togglePrevious = (id: PreviousUpgradeId) => {
     setAnswers((a) => {
@@ -333,207 +559,215 @@ export function StepCurrentHome({ answers, setAnswers }: PlannerPanelProps) {
   };
 
   return (
-    <PlannerStepFrame title={meta.title} description={meta.description}>
-      <div className="space-y-8">
-        <PlannerField
-          label="What is your main heating system?"
-          htmlFor="heating"
-          hint="Choose the system you rely on most of the winter."
-          required
-        >
-          <select
-            id="heating"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.heating}
-            onChange={(e) => setAnswers((a) => ({ ...a, heating: e.target.value }))}
-          >
-            <option value="">Choose…</option>
-            {HEATING_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
-
-        <PlannerField
-          label="Do you already know your BER?"
-          htmlFor="ber-status"
-          hint="BER is the Building Energy Rating on a certificate — not a guess at bills."
-          required
-        >
-          <select
-            id="ber-status"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.berStatus}
-            onChange={(e) => {
-              const value = e.target.value as PlannerAnswers["berStatus"];
-              setAnswers((a) => {
-                if (value !== "know_band") {
-                  return { ...a, berStatus: value, berRatingBand: "" };
-                }
-                if (a.berStatus !== "know_band") {
-                  return { ...a, berStatus: value, berRatingBand: "" };
-                }
-                return { ...a, berStatus: value };
-              });
-            }}
-          >
-            <option value="">Choose…</option>
-            {BER_STATUS_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
-
-        {showBerBand ? (
+    <PlannerStepFrame
+      title={meta.title}
+      description={<p>This helps us judge what may be realistic next.</p>}
+    >
+      <div className="space-y-6 sm:space-y-7">
+        <section className="space-y-4 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+          <div className="space-y-1">
+            <h2 className="text-base font-semibold text-ink-900">Your home today</h2>
+            <p className="text-sm text-ink-600">Start with heating and BER.</p>
+          </div>
           <PlannerField
-            label="Which band is on the certificate?"
-            htmlFor="ber-band"
-            hint="Pick the letter closest to your cert. If it says exempt, choose exempt."
+            label="What is your main heating system?"
+            htmlFor="heating"
+            hint="Choose the system you rely on most through winter."
             required
           >
             <select
-              id="ber-band"
+              id="heating"
               className={selectClassName()}
               style={{ backgroundImage: chevronBg }}
-              value={answers.berRatingBand}
-              onChange={(e) =>
-                setAnswers((a) => ({
-                  ...a,
-                  berRatingBand: e.target.value as PlannerAnswers["berRatingBand"]
-                }))
-              }
+              value={answers.heating}
+              onChange={(e) => setAnswers((a) => ({ ...a, heating: e.target.value }))}
             >
               <option value="">Choose…</option>
-              {BER_BAND_OPTIONS.map((o) => (
+              {HEATING_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
                 </option>
               ))}
             </select>
           </PlannerField>
-        ) : null}
 
-        <PlannerField
-          label="Attic or roof-space insulation"
-          htmlFor="attic"
-          required
-        >
-          <select
-            id="attic"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.atticInsulation}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                atticInsulation: e.target.value as PlannerAnswers["atticInsulation"]
-              }))
-            }
+          <PlannerField
+            label="Do you already know your BER?"
+            htmlFor="ber-status"
+            hint="BER is your Building Energy Rating on the certificate."
+            required
           >
-            <option value="">Choose…</option>
-            {ATTIC_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
-
-        <PlannerField label="Wall insulation" htmlFor="wall" required>
-          <select
-            id="wall"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.wallInsulation}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                wallInsulation: e.target.value as PlannerAnswers["wallInsulation"]
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            {WALL_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
-
-        <PlannerField
-          label="Windows (glazing and drafts)"
-          htmlFor="windows"
-          required
-        >
-          <select
-            id="windows"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.windowCondition}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                windowCondition: e.target.value as PlannerAnswers["windowCondition"]
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            {WINDOW_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
-
-        <PlannerField
-          label="Retrofit work already completed"
-          htmlFor="prev-attic"
-          hint="Select every measure you know you have done, or “None of these yet”."
-          required
-        >
-          <div className="grid gap-2 sm:grid-cols-2">
-            {PREVIOUS_UPGRADE_OPTIONS.map((o) => {
-              const checked = answers.previousUpgrades.includes(o.id);
-              const disabled =
-                (o.id === "none_yet" && hasOtherPrev) ||
-                (o.id !== "none_yet" && hasNoneYet);
-              return (
-                <label
-                  key={o.id}
-                  className={cn(
-                    "flex items-center gap-3 rounded-xl border px-3 py-3 text-sm font-medium transition",
-                    disabled
-                      ? "cursor-not-allowed opacity-60"
-                      : "cursor-pointer",
-                    checked
-                      ? "border-teal-600 bg-teal-50 text-ink-900"
-                      : cn(
-                          "border-ink-200 bg-white text-ink-700",
-                          !disabled && "hover:border-ink-300"
-                        )
-                  )}
-                >
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 shrink-0 rounded border-ink-300 text-teal-600 focus:ring-teal-500 disabled:cursor-not-allowed"
-                    checked={checked}
-                    disabled={disabled}
-                    onChange={() => togglePrevious(o.id)}
-                  />
+            <select
+              id="ber-status"
+              className={selectClassName()}
+              style={{ backgroundImage: chevronBg }}
+              value={answers.berStatus}
+              onChange={(e) => {
+                const value = e.target.value as PlannerAnswers["berStatus"];
+                setAnswers((a) => {
+                  if (value !== "know_band") {
+                    return { ...a, berStatus: value, berRatingBand: "" };
+                  }
+                  if (a.berStatus !== "know_band") {
+                    return { ...a, berStatus: value, berRatingBand: "" };
+                  }
+                  return { ...a, berStatus: value };
+                });
+              }}
+            >
+              <option value="">Choose…</option>
+              {BER_STATUS_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
                   {o.label}
-                </label>
-              );
-            })}
-          </div>
-        </PlannerField>
+                </option>
+              ))}
+            </select>
+          </PlannerField>
+
+          {showBerBand ? (
+            <PlannerField
+              label="Which band is on the certificate?"
+              htmlFor="ber-band"
+              hint="Pick the BER band shown on your cert."
+              required
+            >
+              <select
+                id="ber-band"
+                className={selectClassName()}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.berRatingBand}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    berRatingBand: e.target.value as PlannerAnswers["berRatingBand"]
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                {BER_BAND_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </PlannerField>
+          ) : null}
+        </section>
+
+        <div className={revealClass(showFabricSection)} aria-hidden={!showFabricSection}>
+          <section className="space-y-4 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+            <div className="space-y-1">
+              <h2 className="text-base font-semibold text-ink-900">Fabric and upgrades</h2>
+              <p className="text-sm text-ink-600">
+                Now tell us about insulation, windows, and any work already done.
+              </p>
+            </div>
+            <PlannerField
+              label="Attic or roof-space insulation"
+              htmlFor="attic"
+              required
+            >
+              <select
+                id="attic"
+                className={selectClassName()}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.atticInsulation}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    atticInsulation: e.target.value as PlannerAnswers["atticInsulation"]
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                {ATTIC_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </PlannerField>
+
+            <PlannerField label="Wall insulation" htmlFor="wall" required>
+              <select
+                id="wall"
+                className={selectClassName()}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.wallInsulation}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    wallInsulation: e.target.value as PlannerAnswers["wallInsulation"]
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                {WALL_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </PlannerField>
+
+            <PlannerField
+              label="Windows (glazing and drafts)"
+              htmlFor="windows"
+              required
+            >
+              <select
+                id="windows"
+                className={selectClassName()}
+                style={{ backgroundImage: chevronBg }}
+                value={answers.windowCondition}
+                onChange={(e) =>
+                  setAnswers((a) => ({
+                    ...a,
+                    windowCondition: e.target.value as PlannerAnswers["windowCondition"]
+                  }))
+                }
+              >
+                <option value="">Choose…</option>
+                {WINDOW_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </PlannerField>
+
+            <PlannerField
+              label="Retrofit work already completed"
+              htmlFor="prev-attic"
+              hint="Choose all that apply, or select “None of these yet”."
+              required
+            >
+              <div className="grid gap-3 sm:grid-cols-2">
+                {PREVIOUS_UPGRADE_OPTIONS.map((o) => {
+                  const checked = answers.previousUpgrades.includes(o.id);
+                  const disabled =
+                    (o.id === "none_yet" && hasOtherPrev) ||
+                    (o.id !== "none_yet" && hasNoneYet);
+                  const option: PlannerChoiceOption<PreviousUpgradeId> = {
+                    value: o.id,
+                    label: o.label,
+                    Icon: PREVIOUS_UPGRADE_CARD_ICONS[o.id]
+                  };
+                  return (
+                    <PlannerMultiSelectCard
+                      key={o.id}
+                      id={`prev-${o.id}`}
+                      option={option}
+                      selected={checked}
+                      disabled={disabled}
+                      onToggle={togglePrevious}
+                    />
+                  );
+                })}
+              </div>
+            </PlannerField>
+          </section>
+        </div>
       </div>
     </PlannerStepFrame>
   );
@@ -541,6 +775,15 @@ export function StepCurrentHome({ answers, setAnswers }: PlannerPanelProps) {
 
 export function StepUpgradeInterest({ answers, setAnswers }: PlannerPanelProps) {
   const meta = PLANNER_STEPS[2];
+  const interestById = Object.fromEntries(UPGRADE_INTEREST_OPTIONS.map((o) => [o.id, o])) as Record<
+    UpgradeInterestId,
+    (typeof UPGRADE_INTEREST_OPTIONS)[number]
+  >;
+  const groupedInterestIds: UpgradeInterestId[][] = [
+    ["heat_pump", "solar_pv"],
+    ["attic_insulation", "wall_insulation", "windows_doors"]
+  ];
+  const standaloneInterestIds: UpgradeInterestId[] = ["full_retrofit"];
   const toggleInterest = (id: UpgradeInterestId) => {
     setAnswers((a) => {
       if (id === "not_sure") {
@@ -559,33 +802,113 @@ export function StepUpgradeInterest({ answers, setAnswers }: PlannerPanelProps) 
 
   return (
     <PlannerStepFrame title={meta.title} description={meta.description}>
-      <div className="grid gap-2 sm:grid-cols-2">
-        {UPGRADE_INTEREST_OPTIONS.map((o) => {
-          const checked = answers.upgradeInterests.includes(o.id);
-          const muted =
-            answers.upgradeInterests.includes("not_sure") && o.id !== "not_sure";
-          return (
-            <label
-              key={o.id}
-              className={cn(
-                "flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-3 text-sm font-medium transition",
-                muted && "pointer-events-none opacity-40",
-                checked
-                  ? "border-teal-600 bg-teal-50 text-ink-900"
-                  : "border-ink-200 bg-white text-ink-700 hover:border-ink-300"
-              )}
-            >
-              <input
-                type="checkbox"
-                className="h-4 w-4 shrink-0 rounded border-ink-300 text-teal-600 focus:ring-teal-500"
-                checked={checked}
+      <div className="space-y-5">
+        <section className="space-y-2.5" aria-label="Energy and heating options">
+          <p className="text-xs font-semibold tracking-wide text-ink-600">Energy & heating</p>
+          <div className="grid gap-2.5 sm:grid-cols-2">
+            {groupedInterestIds[0].map((id) => {
+              const o = interestById[id];
+              const checked = answers.upgradeInterests.includes(o.id);
+              const muted =
+                answers.upgradeInterests.includes("not_sure") && o.id !== "not_sure";
+              const option: PlannerChoiceOption<UpgradeInterestId> = {
+                value: o.id,
+                label: o.label,
+                Icon: UPGRADE_INTEREST_CARD_ICONS[o.id]
+              };
+              return (
+                <PlannerMultiSelectCard
+                  key={o.id}
+                  id={`upgrade-interest-${o.id}`}
+                  option={option}
+                  selected={checked}
+                  disabled={muted}
+                  onToggle={toggleInterest}
+                  showSelectedCheck
+                />
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="space-y-2.5 pt-1" aria-label="Insulation and fabric options">
+          <p className="text-xs font-semibold tracking-wide text-ink-600">Insulation & fabric</p>
+          <div className="grid gap-2.5 sm:grid-cols-2">
+            {groupedInterestIds[1].map((id) => {
+              const o = interestById[id];
+              const checked = answers.upgradeInterests.includes(o.id);
+              const muted =
+                answers.upgradeInterests.includes("not_sure") && o.id !== "not_sure";
+              const option: PlannerChoiceOption<UpgradeInterestId> = {
+                value: o.id,
+                label: o.label,
+                Icon: UPGRADE_INTEREST_CARD_ICONS[o.id]
+              };
+              return (
+                <PlannerMultiSelectCard
+                  key={o.id}
+                  id={`upgrade-interest-${o.id}`}
+                  option={option}
+                  selected={checked}
+                  disabled={muted}
+                  onToggle={toggleInterest}
+                  showSelectedCheck
+                />
+              );
+            })}
+          </div>
+        </section>
+
+        <div className="grid gap-2.5 sm:grid-cols-2">
+          {standaloneInterestIds.map((id) => {
+            const o = interestById[id];
+            const checked = answers.upgradeInterests.includes(o.id);
+            const muted =
+              answers.upgradeInterests.includes("not_sure") && o.id !== "not_sure";
+            const option: PlannerChoiceOption<UpgradeInterestId> = {
+              value: o.id,
+              label: o.label,
+              Icon: UPGRADE_INTEREST_CARD_ICONS[o.id]
+            };
+            return (
+              <PlannerMultiSelectCard
+                key={o.id}
+                id={`upgrade-interest-${o.id}`}
+                option={option}
+                selected={checked}
                 disabled={muted}
-                onChange={() => toggleInterest(o.id)}
+                onToggle={toggleInterest}
+                showSelectedCheck
+                className="sm:col-span-2"
               />
-              {o.label}
-            </label>
-          );
-        })}
+            );
+          })}
+        </div>
+
+        <div className="pt-1">
+          {(() => {
+            const o = interestById.not_sure;
+            const checked = answers.upgradeInterests.includes(o.id);
+            const option: PlannerChoiceOption<UpgradeInterestId> = {
+              value: o.id,
+              label: o.label,
+              Icon: UPGRADE_INTEREST_CARD_ICONS[o.id]
+            };
+            return (
+              <PlannerMultiSelectCard
+                id={`upgrade-interest-${o.id}`}
+                option={option}
+                selected={checked}
+                onToggle={toggleInterest}
+                showSelectedCheck
+                className={cn(
+                  "border-ink-300 bg-ink-100/20 hover:border-ink-400",
+                  checked && "border-teal-600 bg-teal-50/70"
+                )}
+              />
+            );
+          })()}
+        </div>
       </div>
     </PlannerStepFrame>
   );
@@ -598,110 +921,168 @@ export function StepUpgradeInterest({ answers, setAnswers }: PlannerPanelProps) 
 
 export function StepIntentReadiness({ answers, setAnswers }: PlannerPanelProps) {
   const meta = PLANNER_STEPS[3];
+  const hasTimeline = Boolean(answers.timeline);
+  const hasQuoteStage = Boolean(answers.quotesOrInstallerDiscussions);
+  const hasBudget = Boolean(answers.budget);
+  const revealClass = (isVisible: boolean) =>
+    cn(
+      "overflow-hidden transition-all duration-300 ease-out",
+      isVisible
+        ? "max-h-[1000px] translate-y-0 opacity-100"
+        : "max-h-0 -translate-y-1 opacity-0"
+    );
+  const timelineOptions: PlannerChoiceOption<(typeof TIMELINE_OPTIONS)[number]["value"]>[] =
+    TIMELINE_OPTIONS.map((option) => ({
+      value: option.value,
+      label: option.label,
+      Icon: TIMELINE_CARD_ICONS[option.value]
+    }));
+  const quoteOptions: PlannerChoiceOption<
+    (typeof QUOTES_INSTALLER_OPTIONS)[number]["value"]
+  >[] = QUOTES_INSTALLER_OPTIONS.map((option) => ({
+    value: option.value,
+    label: option.label,
+    Icon: QUOTES_INSTALLER_CARD_ICONS[option.value]
+  }));
+  const budgetOptions: PlannerChoiceOption<(typeof BUDGET_OPTIONS)[number]["value"]>[] =
+    BUDGET_OPTIONS.map((option) => ({
+      value: option.value,
+      label: option.label,
+      Icon: BUDGET_CARD_ICONS[option.value]
+    }));
+  const nextStepOptions: PlannerChoiceOption<
+    (typeof NEXT_STEP_PREFERENCE_OPTIONS)[number]["value"]
+  >[] = NEXT_STEP_PREFERENCE_OPTIONS.map((option) => ({
+    value: option.value,
+    label: option.label,
+    Icon: NEXT_STEP_PREFERENCE_CARD_ICONS[option.value]
+  }));
+
   return (
     <PlannerStepFrame title={meta.title} description={meta.description}>
-      <div className="grid gap-6 sm:grid-cols-2">
-        <PlannerField
-          label="When would you ideally like to start work?"
-          htmlFor="timeline"
-          required
-        >
-          <select
-            id="timeline"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.timeline}
-            onChange={(e) => {
-              const timeline = e.target.value;
-              setAnswers((a) => ({
-                ...a,
-                timeline,
-                moveWithinSixMonths: moveWithinSixMonthsFromTimeline(timeline)
-              }));
-            }}
+      <div className="space-y-6 sm:space-y-7">
+        <section className="space-y-3 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+          <PlannerField
+            label="When would you ideally like to start work?"
+            htmlFor="timeline-asap"
+            required
           >
-            <option value="">Choose…</option>
-            {TIMELINE_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
+            <div
+              role="radiogroup"
+              aria-label="When would you ideally like to start work?"
+              className="grid gap-3 sm:grid-cols-2"
+            >
+              {timelineOptions.map((option) => (
+                <PlannerSingleSelectCard
+                  key={option.value}
+                  id={`timeline-${option.value}`}
+                  name="timeline"
+                  option={option}
+                  selected={answers.timeline === option.value}
+                  onSelect={(timeline) =>
+                    setAnswers((a) => ({
+                      ...a,
+                      timeline,
+                      moveWithinSixMonths: moveWithinSixMonthsFromTimeline(timeline)
+                    }))
+                  }
+                />
+              ))}
+            </div>
+          </PlannerField>
+        </section>
 
-        <PlannerField
-          label="Where are you in the process with installers or quotes?"
-          htmlFor="quotes-installer"
-          required
-        >
-          <select
-            id="quotes-installer"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.quotesOrInstallerDiscussions}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                quotesOrInstallerDiscussions: e.target.value
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            {QUOTES_INSTALLER_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
+        <div className={revealClass(hasTimeline)} aria-hidden={!hasTimeline}>
+          <section className="space-y-3 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+            <PlannerField
+              label="Where are you in the process with installers or quotes?"
+              htmlFor="quotes-installer-none"
+              required
+            >
+              <div
+                role="radiogroup"
+                aria-label="Where are you in the process with installers or quotes?"
+                className="grid gap-3 sm:grid-cols-2"
+              >
+                {quoteOptions.map((option) => (
+                  <PlannerSingleSelectCard
+                    key={option.value}
+                    id={`quotes-installer-${option.value}`}
+                    name="quotes-installer"
+                    option={option}
+                    selected={answers.quotesOrInstallerDiscussions === option.value}
+                    onSelect={(quotesOrInstallerDiscussions) =>
+                      setAnswers((a) => ({
+                        ...a,
+                        quotesOrInstallerDiscussions
+                      }))
+                    }
+                  />
+                ))}
+              </div>
+            </PlannerField>
+          </section>
+        </div>
 
-        <PlannerField
-          label="Rough total budget in mind (including your share after grants)"
-          htmlFor="budget"
-          required
-        >
-          <select
-            id="budget"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.budget}
-            onChange={(e) => setAnswers((a) => ({ ...a, budget: e.target.value }))}
-          >
-            <option value="">Choose…</option>
-            {BUDGET_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
+        <div className={revealClass(hasQuoteStage)} aria-hidden={!hasQuoteStage}>
+          <section className="space-y-3 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+            <PlannerField
+              label="Rough total budget in mind (including your share after grants)"
+              htmlFor="budget-under_5k"
+              required
+            >
+              <div
+                role="radiogroup"
+                aria-label="Rough total budget in mind (including your share after grants)"
+                className="grid gap-3 sm:grid-cols-2"
+              >
+                {budgetOptions.map((option) => (
+                  <PlannerSingleSelectCard
+                    key={option.value}
+                    id={`budget-${option.value}`}
+                    name="budget"
+                    option={option}
+                    selected={answers.budget === option.value}
+                    onSelect={(budget) => setAnswers((a) => ({ ...a, budget }))}
+                  />
+                ))}
+              </div>
+            </PlannerField>
+          </section>
+        </div>
 
-        <PlannerField
-          label="How would you prefer to move forward after this?"
-          htmlFor="next-step-preference"
-          hint="This only helps us tailor the guidance — you can still view your plan first."
-          required
-        >
-          <select
-            id="next-step-preference"
-            className={selectClassName()}
-            style={{ backgroundImage: chevronBg }}
-            value={answers.openToQualifiedContact}
-            onChange={(e) =>
-              setAnswers((a) => ({
-                ...a,
-                openToQualifiedContact: e.target.value
-              }))
-            }
-          >
-            <option value="">Choose…</option>
-            {NEXT_STEP_PREFERENCE_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </PlannerField>
+        <div className={revealClass(hasBudget)} aria-hidden={!hasBudget}>
+          <section className="space-y-3 rounded-2xl border border-ink-200 bg-white px-4 py-4 sm:px-5 sm:py-5">
+            <PlannerField
+              label="How would you prefer to move forward after this?"
+              htmlFor="next-step-preference-yes"
+              hint="This only helps us tailor the guidance — you can still view your plan first."
+              required
+            >
+              <div
+                role="radiogroup"
+                aria-label="How would you prefer to move forward after this?"
+                className="grid gap-3 sm:grid-cols-2"
+              >
+                {nextStepOptions.map((option) => (
+                  <PlannerSingleSelectCard
+                    key={option.value}
+                    id={`next-step-preference-${option.value}`}
+                    name="next-step-preference"
+                    option={option}
+                    selected={answers.openToQualifiedContact === option.value}
+                    onSelect={(openToQualifiedContact) =>
+                      setAnswers((a) => ({
+                        ...a,
+                        openToQualifiedContact
+                      }))
+                    }
+                  />
+                ))}
+              </div>
+            </PlannerField>
+          </section>
+        </div>
       </div>
     </PlannerStepFrame>
   );
@@ -790,9 +1171,9 @@ function Step5SummaryStat({
   value: string;
 }) {
   return (
-    <div className="rounded-xl border-2 border-black bg-teal-600 px-4 py-3 shadow-[0_8px_18px_rgba(0,0,0,0.12)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(0,0,0,0.16)]">
+    <div className="rounded-xl border-2 border-black bg-teal-600 px-4 py-4 shadow-[0_9px_20px_rgba(0,0,0,0.12)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_13px_26px_rgba(0,0,0,0.16)] sm:px-5 sm:py-4.5">
       <p className="text-xs font-semibold text-white">{label}</p>
-      <p className="mt-1 text-sm font-bold leading-snug text-white">{value}</p>
+      <p className="mt-1.5 text-sm font-bold leading-snug text-white sm:text-[0.95rem]">{value}</p>
     </div>
   );
 }
@@ -825,10 +1206,10 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
       title={meta.title}
       description={<p>You’re almost done — here’s your snapshot.</p>}
     >
-      <div className="space-y-6">
-        <section className="space-y-3" aria-labelledby="preview-snapshot-heading">
+      <div className="mx-auto w-full max-w-3xl space-y-7 sm:space-y-8">
+        <section className="space-y-3.5" aria-labelledby="preview-snapshot-heading">
           <SectionTitle id="preview-snapshot-heading" title="Summary snapshot" />
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3.5 sm:grid-cols-3">
             <Step5SummaryStat label="Best place to start" value={startMeasure} />
             <Step5SummaryStat label="Estimated support" value={supportRange} />
             <Step5SummaryStat label="What to do next" value={likelyNext} />
@@ -838,8 +1219,8 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
         {!preview.isNotSureOnly ? (
           <>
             {preview.maySuit.length > 0 ? (
-              <section className="space-y-3" aria-label="May suit cards">
-                <div className="grid gap-3 sm:grid-cols-2">
+              <section className="space-y-3.5" aria-label="May suit cards">
+                <div className="grid gap-3.5 sm:grid-cols-2">
                   {preview.maySuit.map((card) => (
                     <PreviewUpgradeTeaserCard
                       key={card.id}
@@ -853,8 +1234,8 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
             ) : null}
 
             {preview.assessFirst.length > 0 ? (
-              <section className="space-y-3" aria-label="Needs assessment cards">
-                <div className="grid gap-3 sm:grid-cols-2">
+              <section className="space-y-3.5" aria-label="Needs assessment cards">
+                <div className="grid gap-3.5 sm:grid-cols-2">
                   {preview.assessFirst.map((card) => (
                     <PreviewUpgradeTeaserCard
                       key={card.id}
@@ -895,7 +1276,7 @@ export function StepPartialResult({ answers }: PlannerPanelProps) {
           </ul>
         </section>
 
-        <p className="text-center text-xs font-medium leading-snug text-ink-500">
+        <p className="pt-0.5 text-center text-xs font-medium leading-snug text-ink-500">
           Get your personalised retrofit plan in seconds
         </p>
       </div>
@@ -907,55 +1288,58 @@ export function StepLeadCapture({ answers, setAnswers }: PlannerPanelProps) {
   const meta = PLANNER_STEPS[5];
   return (
     <PlannerStepFrame title={meta.title} description={meta.description}>
-      <div className="space-y-6 sm:max-w-md">
+      <div className="space-y-5 sm:max-w-md">
         <div
-          className="rounded-xl border border-teal-200 bg-gradient-to-b from-teal-50/60 to-white px-4 py-4 shadow-sm ring-1 ring-teal-100/60"
+          className="rounded-xl border border-teal-200/70 bg-teal-50/45 px-4 py-3.5 shadow-sm"
           role="region"
           aria-label="What you will unlock"
         >
           <p className="text-sm font-semibold text-ink-900">What you’ll unlock:</p>
-          <ul className="mt-2.5 list-inside list-disc space-y-1.5 text-sm leading-relaxed text-ink-700 marker:text-teal-600">
+          <ul className="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed text-ink-700 marker:text-teal-600">
             <li>A fuller breakdown of what may suit your home</li>
             <li>Clearer next steps based on your answers</li>
             <li>Recommended upgrade order</li>
           </ul>
         </div>
-        <PlannerField label="Your name" htmlFor="lead-name" required>
-          <input
-            id="lead-name"
-            type="text"
-            autoComplete="name"
-            className={inputClass}
-            value={answers.leadName}
-            onChange={(e) => setAnswers((a) => ({ ...a, leadName: e.target.value }))}
-          />
-        </PlannerField>
-        <PlannerField label="Email" htmlFor="lead-email" required>
-          <input
-            id="lead-email"
-            type="email"
-            autoComplete="email"
-            className={inputClass}
-            value={answers.leadEmail}
-            onChange={(e) => setAnswers((a) => ({ ...a, leadEmail: e.target.value }))}
-          />
-        </PlannerField>
-        <PlannerField
-          label="Mobile (optional)"
-          htmlFor="lead-phone"
-          hint="Optional — useful if someone needs to reach you about your plan."
-        >
-          <input
-            id="lead-phone"
-            type="tel"
-            autoComplete="tel"
-            className={inputClass}
-            value={answers.leadPhone}
-            onChange={(e) => setAnswers((a) => ({ ...a, leadPhone: e.target.value }))}
-          />
-        </PlannerField>
-        <div className="space-y-2">
-          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink-200 bg-white px-3 py-3 text-sm leading-relaxed text-ink-700">
+        <div className="space-y-3.5">
+          <PlannerField label="Your name" htmlFor="lead-name" required>
+            <input
+              id="lead-name"
+              type="text"
+              autoComplete="name"
+              className={inputClass}
+              value={answers.leadName}
+              onChange={(e) => setAnswers((a) => ({ ...a, leadName: e.target.value }))}
+            />
+          </PlannerField>
+          <PlannerField label="Email" htmlFor="lead-email" required>
+            <input
+              id="lead-email"
+              type="email"
+              autoComplete="email"
+              className={inputClass}
+              value={answers.leadEmail}
+              onChange={(e) => setAnswers((a) => ({ ...a, leadEmail: e.target.value }))}
+            />
+          </PlannerField>
+          <PlannerField
+            label="Mobile"
+            htmlFor="lead-phone"
+            hint="Use your best mobile number for plan follow-up."
+            required
+          >
+            <input
+              id="lead-phone"
+              type="tel"
+              autoComplete="tel"
+              className={inputClass}
+              value={answers.leadPhone}
+              onChange={(e) => setAnswers((a) => ({ ...a, leadPhone: e.target.value }))}
+            />
+          </PlannerField>
+        </div>
+        <div className="space-y-2.5">
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink-200 bg-white px-3 py-2.5 text-sm leading-relaxed text-ink-700">
             <input
               type="checkbox"
               className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-300 text-teal-600 focus:ring-teal-500"
@@ -964,13 +1348,10 @@ export function StepLeadCapture({ answers, setAnswers }: PlannerPanelProps) {
                 setAnswers((a) => ({ ...a, consentContact: e.target.checked }))
               }
             />
-            <span>
-              I understand Retrofit Planner may follow up about this draft plan and related
-              grant information.
-            </span>
+            <span>I’m happy to be contacted about my retrofit plan</span>
           </label>
-          <p className="pl-7 text-xs leading-relaxed text-ink-500">
-            Early version: your details are not saved to a server yet.
+          <p className="text-center text-xs font-medium leading-snug text-ink-500">
+            Get your personalised retrofit plan in seconds
           </p>
         </div>
       </div>

@@ -55,6 +55,7 @@ export function validatePlannerStep(
       if (!answers.leadName.trim()) return "Add your name so we can label your plan.";
       if (!answers.leadEmail.trim()) return "Add an email address for your plan.";
       if (!emailOk(answers.leadEmail)) return "Check that your email address looks correct.";
+      if (!answers.leadPhone.trim()) return "Add a mobile number to unlock your full plan.";
       if (!answers.consentContact) {
         return "Confirm you are happy for us to follow up about this plan.";
       }

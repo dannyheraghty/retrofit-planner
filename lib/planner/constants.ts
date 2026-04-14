@@ -16,8 +16,7 @@ export const PLANNER_STEPS: PlannerStepMeta[] = [
     id: "current",
     label: "Current setup",
     title: "Current condition of the home",
-    description:
-      "Heating, BER, and the condition of the main fabric — this helps judge what may be realistic next."
+    description: "This helps us judge what may be realistic next."
   },
   {
     id: "interests",
@@ -31,7 +30,7 @@ export const PLANNER_STEPS: PlannerStepMeta[] = [
     label: "Readiness",
     title: "Timing and next steps",
     description:
-      "No commitment — this only shows how ready you are to move from research to action."
+      "No commitment — this helps us understand how ready you are to move forward."
   },
   {
     id: "partial",
@@ -105,7 +104,7 @@ export const initialPlannerAnswers: PlannerAnswers = {
   leadName: "",
   leadEmail: "",
   leadPhone: "",
-  consentContact: false
+  consentContact: true
 };
 
 export const UPGRADE_INTEREST_OPTIONS: Array<{
