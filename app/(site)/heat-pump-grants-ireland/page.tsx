@@ -99,6 +99,13 @@ export default function HeatPumpGrantsIrelandPage() {
           <p>
             In practice, heat pumps are often part of a wider upgrade plan rather than a single standalone change.
           </p>
+          <p>
+            This guide focuses on how grant support fits that journey. If you are mainly comparing installed price bands and what changes quotes, read{" "}
+            <Link className={linkClass} href="/heat-pump-cost-ireland">
+              heat pump costs in Ireland
+            </Link>{" "}
+            first, then come back here for grant framing.
+          </p>
         </div>
       </Section>
 
@@ -161,8 +168,12 @@ export default function HeatPumpGrantsIrelandPage() {
 
       <RelatedGuides
         links={[
-          { href: "/insulation-grants-ireland", label: "Insulation grants" },
+          { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
           { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
+          { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" },
+          { href: "/ber-assessment-ireland", label: "BER assessment guide" },
+          { href: "/insulation-grants-ireland", label: "Insulation grants" },
           { href: "/solar-panel-grants-ireland", label: "Solar panel grants" }
         ]}
       />

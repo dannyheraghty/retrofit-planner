@@ -21,7 +21,7 @@ export const metadata = grantGuideMetadata({
 const overviewCards = [
   {
     title: "What this guide covers",
-    body: "A practical overview of the main home energy grant areas Irish homeowners often explore—heating, insulation, windows, solar—and what to think about before you commit to a route."
+    body: "A practical overview of the main home energy grant areas Irish homeowners often explore—heating, insulation, windows, solar—and what to think about before you commit to a route. For who may qualify and what shifts eligibility, use the dedicated eligibility guide linked below."
   },
   {
     title: "Who it is for",
@@ -122,6 +122,13 @@ export default function SeaiGrantsIreland2026Page() {
               You might focus on a heat pump first—but the urgent question is often whether insulation, draughts, glazing, or survey work should come first.
             </p>
             <p>That does not make other upgrades “wrong”. The best next step depends on what your home is ready for now.</p>
+            <p>
+              For a step-by-step framing that is not grant-specific, see the{" "}
+              <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+                home energy upgrade guide
+              </Link>
+              .
+            </p>
           </div>
           <Reveal>
             <div className="rounded-[1.1rem] border border-ink-200 bg-white px-5 py-6 shadow-soft sm:px-6 sm:py-7">
@@ -149,6 +156,21 @@ export default function SeaiGrantsIreland2026Page() {
           </ul>
           <p>
             Outcomes depend on your home, the building fabric, the upgrade, and the rules in force when you apply. That is why sequencing and assessment often matter as much as the grant name.
+          </p>
+          <p>
+            If your main question is whether you could qualify rather than which measures exist, read{" "}
+            <Link className={linkClass} href="/seai-grants-eligibility-ireland">
+              SEAI grants eligibility in Ireland
+            </Link>
+            . For typical heat pump installed costs and what moves quotes, see{" "}
+            <Link className={linkClass} href="/heat-pump-cost-ireland">
+              heat pump costs in Ireland
+            </Link>
+            . For BER timing and certificate basics, see the{" "}
+            <Link className={linkClass} href="/ber-assessment-ireland">
+              BER assessment guide
+            </Link>
+            .
           </p>
           <p>
             When you want this translated to your property,{" "}
@@ -199,7 +221,13 @@ export default function SeaiGrantsIreland2026Page() {
               <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-7 text-ink-600 sm:text-[0.95rem]">
                 <li>official programme criteria</li>
                 <li>technical assessment</li>
-                <li>BER review where needed</li>
+                <li>
+                  BER review where needed (see the{" "}
+                  <Link className={linkClass} href="/ber-assessment-ireland">
+                    BER assessment guide
+                  </Link>
+                  )
+                </li>
                 <li>installer or retrofit professional advice</li>
               </ul>
             </div>
@@ -209,6 +237,10 @@ export default function SeaiGrantsIreland2026Page() {
 
       <RelatedGuides
         links={[
+          { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
+          { href: "/ber-assessment-ireland", label: "BER assessment guide" },
+          { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" },
           { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
           { href: "/insulation-grants-ireland", label: "Insulation grants" },
           { href: "/solar-panel-grants-ireland", label: "Solar panel grants" },

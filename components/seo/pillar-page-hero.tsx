@@ -6,13 +6,15 @@ type PillarPageHeroProps = {
   title: string;
   intro: string;
   summaryItems: readonly string[];
+  ctaLabel?: string;
 };
 
 export function PillarPageHero({
   eyebrow,
   title,
   intro,
-  summaryItems
+  summaryItems,
+  ctaLabel = "Start planner"
 }: PillarPageHeroProps) {
   return (
     <section className="relative overflow-hidden bg-[#0f8f81] pb-6 pt-8 sm:pb-10 sm:pt-10 lg:pb-12">
@@ -34,7 +36,7 @@ export function PillarPageHero({
                 size="lg"
                 className="w-full justify-center max-sm:h-14 max-sm:px-7 max-sm:text-base sm:h-14 sm:w-full sm:px-14 sm:text-base"
               >
-                Start planner
+                {ctaLabel}
               </StartPlannerLink>
             </div>
           </Reveal>

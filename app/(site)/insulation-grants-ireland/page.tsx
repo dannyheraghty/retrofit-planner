@@ -100,6 +100,13 @@ export default function InsulationGrantsIrelandPage() {
             In practice, insulation is often one of the most impactful early improvements—but it still benefits from being
             considered as part of a wider plan.
           </p>
+          <p>
+            For the wider retrofit sequence (fabric, heating, solar) before you fixate on one grant, see the{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade guide
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 
@@ -159,9 +166,12 @@ export default function InsulationGrantsIrelandPage() {
 
       <RelatedGuides
         links={[
+          { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
+          { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
           { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
           { href: "/windows-doors-grants-ireland", label: "Windows and doors grants" },
-          { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" }
+          { href: "/ber-assessment-ireland", label: "BER assessment guide" }
         ]}
       />
 

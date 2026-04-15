@@ -104,6 +104,13 @@ export default function SolarPanelGrantsIrelandPage() {
             </Link>{" "}
             for how support across measures fits together.
           </p>
+          <p>
+            For a non-grant-first order of works many homeowners use, start with the{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade guide
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 
@@ -166,9 +173,12 @@ export default function SolarPanelGrantsIrelandPage() {
 
       <RelatedGuides
         links={[
+          { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
           { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
           { href: "/insulation-grants-ireland", label: "Insulation grants" },
-          { href: "/heat-pump-grants-ireland", label: "Heat pump grants" }
+          { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
+          { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" }
         ]}
       />
 

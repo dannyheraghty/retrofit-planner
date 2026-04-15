@@ -99,6 +99,13 @@ export default function WindowsDoorsGrantsIrelandPage() {
           <p>
             In practice, windows and doors are often part of a broader upgrade plan rather than a standalone fix.
           </p>
+          <p>
+            If you have not mapped that wider sequence yet, the{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade guide
+            </Link>{" "}
+            is a better starting point than any single measure page.
+          </p>
         </div>
       </Section>
 
@@ -169,9 +176,12 @@ export default function WindowsDoorsGrantsIrelandPage() {
 
       <RelatedGuides
         links={[
-          { href: "/insulation-grants-ireland", label: "Insulation grants" },
+          { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
           { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
-          { href: "/heat-pump-grants-ireland", label: "Heat pump grants" }
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
+          { href: "/insulation-grants-ireland", label: "Insulation grants" },
+          { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
+          { href: "/ber-assessment-ireland", label: "BER assessment guide" }
         ]}
       />
 
