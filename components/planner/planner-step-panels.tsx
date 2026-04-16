@@ -212,6 +212,7 @@ export type PlannerPanelProps = {
   answers: PlannerAnswers;
   setAnswers: Dispatch<SetStateAction<PlannerAnswers>>;
   onResetPlan?: () => void;
+  submissionSucceeded?: boolean;
 };
 
 function selectClassName() {
@@ -1359,7 +1360,11 @@ export function StepLeadCapture({ answers, setAnswers }: PlannerPanelProps) {
   );
 }
 
-export function StepFullResult({ answers, onResetPlan }: PlannerPanelProps) {
+export function StepFullResult({
+  answers,
+  onResetPlan,
+  submissionSucceeded
+}: PlannerPanelProps) {
   const meta = PLANNER_STEPS[6];
   const plan = buildFullRetrofitPlan(answers);
   const showGrantNumbers = plan.grantRange.maxEuro > 0;
@@ -1386,6 +1391,18 @@ export function StepFullResult({ answers, onResetPlan }: PlannerPanelProps) {
       }
     >
       <div className="space-y-8 border-t border-ink-100 pt-8">
+        {submissionSucceeded ? (
+          <section
+            className="rounded-xl border border-teal-200/80 bg-teal-50/60 px-4 py-4 text-sm text-ink-800"
+            aria-label="Submission saved"
+          >
+            <p className="font-semibold text-ink-900">Your details were saved successfully.</p>
+            <p className="mt-1 leading-snug text-ink-700">
+              Your full retrofit plan is now ready below.
+            </p>
+          </section>
+        ) : null}
+
         <section
           className="rounded-xl border border-teal-200/70 bg-gradient-to-br from-teal-50/90 via-white to-white px-4 py-5 sm:px-6 sm:py-6"
           aria-labelledby="plan-at-a-glance-heading"

@@ -4,7 +4,9 @@ import { useCallback, useState } from "react";
 
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 import { initialPlannerAnswers, PLANNER_STEPS } from "@/lib/planner/constants";
+import { buildLeadInsertPayload, type LeadInsertPayload } from "@/lib/planner/lead-payload";
 import type { PlannerAnswers } from "@/lib/planner/types";
 import { validatePlannerStep } from "@/lib/planner/validation";
 import { PlannerInlineError } from "@/components/planner/planner-field";
@@ -13,30 +15,80 @@ import { PlannerStepper } from "@/components/planner/planner-stepper";
 import { cn } from "@/lib/utils";
 
 const LAST_STEP = PLANNER_STEP_PANELS.length - 1;
+const LEAD_SOURCE = "planner";
+const LEAD_STATUS = "new";
+const PLANNER_VERSION = "2026-04";
 
 export function PlannerShell() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<PlannerAnswers>(initialPlannerAnswers);
   const [stepError, setStepError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionSucceeded, setSubmissionSucceeded] = useState(false);
 
   const resetPlan = useCallback(() => {
     setStep(0);
     setAnswers(initialPlannerAnswers);
     setStepError(null);
+    setIsSubmitting(false);
+    setSubmissionSucceeded(false);
   }, []);
 
-  const goNext = () => {
+  const goNext = async () => {
     const err = validatePlannerStep(step, answers);
     if (err) {
       setStepError(err);
       return;
     }
+
     setStepError(null);
+    if (step === LAST_STEP - 1) {
+      setIsSubmitting(true);
+
+      try {
+        if (!isSupabaseConfigured) {
+          throw new Error(
+            "Planner submissions are not configured yet. Add the Supabase environment variables and try again."
+          );
+        }
+
+        const supabase = getSupabaseClient();
+        const leadsTable = supabase.from("leads") as unknown as {
+          insert: (values: LeadInsertPayload[]) => Promise<{ error: Error | null }>;
+        };
+        const leadPayload = buildLeadInsertPayload(answers, {
+          source: LEAD_SOURCE,
+          landingPage: window.location.pathname + window.location.search,
+          status: LEAD_STATUS,
+          plannerVersion: PLANNER_VERSION
+        });
+        const { error } = await leadsTable.insert([leadPayload]);
+
+        if (error) {
+          throw error;
+        }
+
+        setSubmissionSucceeded(true);
+        setStep((s) => s + 1);
+        return;
+      } catch (submissionError) {
+        console.error("Failed to save planner lead", submissionError);
+        setSubmissionSucceeded(false);
+        setStepError(
+          "We could not save your details just now. Please check your connection and try again."
+        );
+        return;
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+
     if (step < LAST_STEP) setStep((s) => s + 1);
   };
 
   const goBack = () => {
     setStepError(null);
+    setSubmissionSucceeded(false);
     if (step > 0) setStep((s) => s - 1);
   };
 
@@ -91,6 +143,7 @@ export function PlannerShell() {
                   answers={answers}
                   setAnswers={setAnswers}
                   onResetPlan={step === LAST_STEP ? resetPlan : undefined}
+                  submissionSucceeded={submissionSucceeded}
                 />
               </div>
               <PlannerInlineError id="planner-step-error" message={stepError} />
@@ -102,10 +155,10 @@ export function PlannerShell() {
                 <button
                   type="button"
                   onClick={goBack}
-                  disabled={step === 0}
+                  disabled={step === 0 || isSubmitting}
                   className={cn(
                     "order-2 h-12 rounded-xl border border-ink-200 bg-white px-5 text-sm font-semibold text-ink-800 transition hover:border-ink-300 hover:bg-ink-100/80 sm:order-1",
-                    step === 0 && "pointer-events-none opacity-40"
+                    (step === 0 || isSubmitting) && "pointer-events-none opacity-40"
                   )}
                 >
                   Back
@@ -114,9 +167,10 @@ export function PlannerShell() {
                   <button
                     type="button"
                     onClick={goNext}
+                    disabled={isSubmitting}
                     className="order-1 h-12 rounded-[0.95rem] border-2 border-black bg-cta px-6 text-sm font-semibold text-white shadow-[0_6px_16px_rgba(0,0,0,0.12)] transition duration-200 hover:-translate-y-0.5 hover:bg-cta-dark hover:shadow-[0_10px_22px_rgba(0,0,0,0.16)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-dark sm:order-2 sm:ml-auto"
                   >
-                    {nextLabel}
+                    {isSubmitting ? "Saving..." : nextLabel}
                   </button>
                 ) : null}
               </div>
