@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
+
 type FaqItemProps = {
   question: string;
-  answer: string;
+  answer: ReactNode;
   defaultOpen?: boolean;
 };
 
