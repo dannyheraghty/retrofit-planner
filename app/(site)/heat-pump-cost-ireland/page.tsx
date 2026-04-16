@@ -206,6 +206,13 @@ export default function HeatPumpCostIrelandPage() {
             first.
           </p>
           <p>
+            This page stays focused on pricing. For the full decision guide, see{" "}
+            <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
+              is a heat pump worth it in Ireland
+            </Link>
+            .
+          </p>
+          <p>
             For a broader order-of-works view, use the{" "}
             <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
               home energy upgrade guide

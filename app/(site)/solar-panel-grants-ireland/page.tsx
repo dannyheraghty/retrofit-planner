@@ -212,7 +212,15 @@ export default function SolarPanelGrantsIrelandPage() {
             />
             <FaqItem
               question="Are solar panels worth it in Ireland?"
-              answer="It depends on your roof, energy usage, and how much electricity you use during the day."
+              answer={
+                <>
+                  It depends on your roof, energy usage, and how much electricity you use during the day. For the dedicated decision guide, see{" "}
+                  <Link className={linkClass} href="/is-solar-worth-it-ireland">
+                    is solar worth it in Ireland
+                  </Link>
+                  .
+                </>
+              }
             />
             <FaqItem
               question="Do I need planning permission for solar panels?"

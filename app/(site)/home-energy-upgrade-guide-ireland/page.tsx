@@ -199,6 +199,18 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
             <Link className={linkClass} href="/heat-pump-cost-ireland">
               heat pump cost guide
             </Link>
+            . If you are still comparing whether specific upgrades make sense at all, see{" "}
+            <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
+              whether a heat pump is worth it
+            </Link>
+            ,{" "}
+            <Link className={linkClass} href="/is-insulation-worth-it-ireland">
+              whether insulation is worth it
+            </Link>
+            , or{" "}
+            <Link className={linkClass} href="/is-solar-worth-it-ireland">
+              whether solar is worth it
+            </Link>
             .
           </p>
         </div>
@@ -229,6 +241,10 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
         links={[
           { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
           { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
+          { href: "/is-heat-pump-worth-it-ireland", label: "Is a heat pump worth it in Ireland?" },
+          { href: "/is-insulation-worth-it-ireland", label: "Is insulation worth it in Ireland?" },
+          { href: "/is-solar-worth-it-ireland", label: "Is solar worth it in Ireland?" },
+          { href: "/does-retrofit-increase-house-value-ireland", label: "Does retrofit increase house value in Ireland?" },
           { href: "/ber-assessment-ireland", label: "BER assessment guide" },
           { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" },
           { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },

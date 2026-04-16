@@ -166,6 +166,22 @@ export default function SeaiGrantsIreland2026Page() {
             <Link className={linkClass} href="/heat-pump-cost-ireland">
               heat pump costs in Ireland
             </Link>
+            . If you are still deciding whether a measure makes sense at all, compare{" "}
+            <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
+              whether a heat pump is worth it
+            </Link>
+            ,{" "}
+            <Link className={linkClass} href="/is-insulation-worth-it-ireland">
+              whether insulation is worth it
+            </Link>
+            ,{" "}
+            <Link className={linkClass} href="/is-solar-worth-it-ireland">
+              whether solar is worth it
+            </Link>
+            , or{" "}
+            <Link className={linkClass} href="/does-retrofit-increase-house-value-ireland">
+              whether retrofit may increase house value
+            </Link>
             . For BER timing and certificate basics, see the{" "}
             <Link className={linkClass} href="/ber-assessment-ireland">
               BER assessment guide
@@ -239,6 +255,10 @@ export default function SeaiGrantsIreland2026Page() {
         links={[
           { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide" },
           { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
+          { href: "/is-heat-pump-worth-it-ireland", label: "Is a heat pump worth it in Ireland?" },
+          { href: "/is-insulation-worth-it-ireland", label: "Is insulation worth it in Ireland?" },
+          { href: "/is-solar-worth-it-ireland", label: "Is solar worth it in Ireland?" },
+          { href: "/does-retrofit-increase-house-value-ireland", label: "Does retrofit increase house value in Ireland?" },
           { href: "/ber-assessment-ireland", label: "BER assessment guide" },
           { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" },
           { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
