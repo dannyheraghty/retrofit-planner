@@ -162,6 +162,10 @@ export default function SeaiGrantsIreland2026Page() {
             <Link className={linkClass} href="/seai-grants-eligibility-ireland">
               SEAI grants eligibility in Ireland
             </Link>
+            . For practical planning across combined supports, use the{" "}
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
+              home retrofit grants guide
+            </Link>
             . For typical heat pump installed costs and what moves quotes, see{" "}
             <Link className={linkClass} href="/heat-pump-cost-ireland">
               heat pump costs in Ireland

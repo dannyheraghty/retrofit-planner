@@ -135,6 +135,13 @@ export default function BerAssessmentIrelandPage() {
             <li>It is useful before major upgrades so you can compare before and after performance.</li>
           </ul>
           <p>Many homeowners ask, “Do I need a BER assessment?” The answer depends on what you are doing next.</p>
+          <p>
+            For retrofit timing decisions, see{" "}
+            <Link className={linkClass} href="/do-i-need-a-ber-assessment-before-retrofit-ireland">
+              do you need a BER before retrofit?
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 

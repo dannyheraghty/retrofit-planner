@@ -166,6 +166,10 @@ export default function SeaiGrantsEligibilityIrelandPage() {
             <Link className={linkClass} href="/ber-assessment-ireland">
               BER assessment guide
             </Link>
+            . For timing decisions on assessment before upgrade planning, read{" "}
+            <Link className={linkClass} href="/do-i-need-a-ber-assessment-before-retrofit-ireland">
+              when to get a BER before retrofit
+            </Link>
             .
           </p>
         </div>

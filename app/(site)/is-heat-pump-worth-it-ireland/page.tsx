@@ -79,7 +79,11 @@ export default function IsHeatPumpWorthItIrelandPage() {
             <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
               home energy upgrade guide
             </Link>{" "}
-            explains how insulation, heating, and grants fit together. If you are weighing fabric work first, see{" "}
+            explains how insulation, heating, and grants fit together. For a sequencing checklist, see{" "}
+            <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+              what to upgrade before a heat pump
+            </Link>
+            . If you are weighing fabric work first, see{" "}
             <Link className={linkClass} href="/is-insulation-worth-it-ireland">
               whether insulation is worth it
             </Link>

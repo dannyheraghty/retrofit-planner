@@ -90,6 +90,13 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
             sell, even where the financial return is not a simple one-to-one match with the money spent.
           </p>
           <p>
+            For a practical savings view alongside resale impact, see{" "}
+            <Link className={linkClass} href="/how-much-can-you-save-with-a-home-retrofit-ireland">
+              how much you can save with a retrofit
+            </Link>
+            .
+          </p>
+          <p>
             If you are deciding what to do first, the{" "}
             <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
               home energy upgrade guide

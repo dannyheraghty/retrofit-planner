@@ -132,6 +132,10 @@ export default function IsInsulationWorthItIrelandPage() {
             <Link className={linkClass} href="/insulation-grants-ireland">
               insulation grants Ireland guide
             </Link>
+            , and compare broader{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              whole-home retrofit cost ranges
+            </Link>
             .
           </p>
         </div>

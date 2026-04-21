@@ -20,7 +20,12 @@ const paths = [
   "/heat-pump-grants-ireland",
   "/insulation-grants-ireland",
   "/solar-panel-grants-ireland",
-  "/windows-doors-grants-ireland"
+  "/windows-doors-grants-ireland",
+  "/do-i-need-a-ber-assessment-before-retrofit-ireland",
+  "/how-much-can-you-save-with-a-home-retrofit-ireland",
+  "/home-retrofit-grants-ireland",
+  "/what-to-upgrade-first-home-retrofit-ireland",
+  "/home-retrofit-cost-ireland"
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

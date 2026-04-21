@@ -117,6 +117,10 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
               <Link className={linkClass} href="/planner">
                 use the planner
               </Link>
+              , then read{" "}
+              <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+                what to upgrade first in your home
+              </Link>
               .
             </p>
           </div>
@@ -193,6 +197,13 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
           </p>
           <p>
             Scope is usually the biggest cost driver: fabric upgrades, heating changes, and electrical works all add complexity. Compare options as a package, not as isolated line items.
+          </p>
+          <p>
+            For overall budgeting across measures, use the{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              home retrofit cost guide
+            </Link>
+            .
           </p>
           <p>
             If a heat pump is on your list, typical installed ranges and grant effects are summarised in the{" "}
