@@ -11,12 +11,59 @@ import { Section } from "@/components/ui/section";
 import { grantGuideMetadata } from "@/lib/seo/grant-guide-metadata";
 import { pillarProseClass } from "@/lib/seo/pillar-page";
 
-export const metadata = grantGuideMetadata({
-  path: "/does-retrofit-increase-house-value-ireland",
-  titleSegment: "Does Retrofit Increase House Value in Ireland?",
-  description:
-    "Does a home energy retrofit increase property value in Ireland? Learn how BER ratings, upgrades, and energy efficiency impact resale value."
-});
+const pageTitle = "Does Retrofitting Increase House Value in Ireland? What Actually Adds Value";
+const pageDescription =
+  "Not all retrofits increase house value. See which upgrades actually boost resale appeal in Ireland — and which ones don’t before you spend thousands.";
+
+export const metadata = {
+  ...grantGuideMetadata({
+    path: "/does-retrofit-increase-house-value-ireland",
+    titleSegment: pageTitle,
+    description: pageDescription
+  }),
+  title: {
+    absolute: pageTitle
+  }
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Does a higher BER rating increase house value in Ireland?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Often, yes. In Ireland, buyers use BER as a quick signal for likely heating costs, comfort, and future upgrade needs. A stronger rating can make a property more appealing, but it does not guarantee the same price uplift in every area."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "What upgrades add the most value to a home in Ireland?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The upgrades most likely to add value are those that improve BER, reduce running costs, and are visible or meaningful to buyers. Insulation, airtightness improvements, heating upgrades, and solar can help when they fit the property and local market."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Is a heat pump good for resale value?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A heat pump can support resale value when the home is ready for it, has good insulation, and the system reduces likely running costs. It may add less value if installed before heat loss issues are fixed."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Do buyers care about energy efficiency in Ireland?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Buyers increasingly care about energy efficiency because it affects running costs, comfort, and future upgrade needs. BER is one of the clearest signals buyers can compare."
+      }
+    }
+  ]
+};
 
 const overviewCards = [
   {
@@ -39,16 +86,18 @@ const linkClass =
 export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+
       <PillarPageHero
         eyebrow="DECISION GUIDE"
         title="Does Retrofit Increase House Value in Ireland?"
-        intro="Yes, but not automatically. Retrofit can increase house value in Ireland where it delivers a clear BER improvement, the work is done well, and buyers in the local market value lower running costs and better comfort. Poorly chosen or minimal upgrades usually have a much smaller effect, so the real question is how strong the improvement is and how visible it is to a buyer."
+        intro="Some upgrades increase your home’s value — others barely move the needle. In Ireland, the difference often comes down to what buyers can see, how much your BER improves, and whether running costs are clearly reduced. This guide shows which upgrades actually add value — and which ones don’t, before you spend thousands."
         summaryItems={[
           "Higher BER ratings can improve resale appeal",
           "Energy-efficient homes are increasingly in demand",
           "Value impact depends on upgrades, location, and market"
         ]}
-        ctaLabel="Start planner"
+        ctaLabel="Check which upgrades are worth it for your home"
       />
 
       <Section className="border-t border-ink-200 py-10 sm:py-12">
@@ -61,6 +110,31 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
               </Card>
             </Reveal>
           ))}
+        </div>
+      </Section>
+
+      <Section className="py-14 sm:py-16" title="Short answer: does retrofit increase value?">
+        <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
+          <p>Yes — but only when the upgrades are visible, meaningful, and aligned with what buyers care about.</p>
+          <p>In Ireland, value typically increases when:</p>
+          <ul className="list-disc space-y-2.5 pl-5">
+            <li>The BER improves significantly (e.g. D → B)</li>
+            <li>Running costs are clearly reduced</li>
+            <li>The home feels more comfortable and modern</li>
+          </ul>
+          <p>Value usually does NOT increase much when:</p>
+          <ul className="list-disc space-y-2.5 pl-5">
+            <li>Upgrades are small or not visible to buyers</li>
+            <li>Insulation or heat loss issues are not addressed first</li>
+            <li>The spend is high relative to the property’s market value</li>
+          </ul>
+          <p>
+            👉 Want to see which upgrades would actually increase your home&apos;s value?{" "}
+            <Link className={linkClass} href="/planner">
+              Check your upgrade plan
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 
@@ -104,7 +178,7 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
             gives a broader view of how insulation, heating, and grants fit together. To compare which measures may be worth doing before you think
             about resale impact, see{" "}
             <Link className={linkClass} href="/is-insulation-worth-it-ireland">
-              whether insulation is worth it
+              whether insulation adds value in Ireland
             </Link>
             ,{" "}
             <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
@@ -118,6 +192,12 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
           </p>
         </div>
       </Section>
+
+      <PillarPageTealCta
+        heading="See what upgrades would actually increase your home's value"
+        body="Check which upgrades improve BER, resale appeal, and running costs — based on your home."
+        buttonLabel="Check your upgrade plan"
+      />
 
       <Section className="py-14 sm:py-16" title="When retrofit can increase house value">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
@@ -188,7 +268,7 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
           <p>
             In practice, the best approach is to compare the likely net cost after{" "}
             <Link className={linkClass} href="/seai-grants-ireland-2026">
-              SEAI grants Ireland
+              how grants affect upgrade value in Ireland
             </Link>
             , the probable BER improvement, and the wider home upgrade ROI Ireland rather than expecting a fixed resale uplift from every measure.
           </p>
@@ -204,33 +284,27 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
           <p>
             This is especially relevant for higher-cost measures. For example, if you are considering a heating upgrade, it helps to compare the{" "}
             <Link className={linkClass} href="/heat-pump-cost-ireland">
-              heat pump cost Ireland
+              heat pump cost vs value in Ireland
             </Link>{" "}
             guide with the{" "}
             <Link className={linkClass} href="/heat-pump-grants-ireland">
-              heat pump grants Ireland
+              how heat pump grants affect upgrade value in Ireland
             </Link>{" "}
             guide so you can judge the likely net spend more realistically.
           </p>
           <p>
             For more detail, see the{" "}
             <Link className={linkClass} href="/seai-grants-ireland-2026">
-              SEAI grants Ireland
+              how grants affect upgrade value in Ireland
             </Link>{" "}
             overview and the{" "}
             <Link className={linkClass} href="/seai-grants-eligibility-ireland">
-              SEAI grants eligibility Ireland
+              grant eligibility and upgrade value in Ireland
             </Link>{" "}
             guide.
           </p>
         </div>
       </Section>
-
-      <PillarPageTealCta
-        heading="See what upgrades could increase your home's value"
-        body="Use the planner to get a clearer view of likely upgrades, possible grants, and what to do first before making retrofit decisions."
-        buttonLabel="Start planner"
-      />
 
       <Section className="py-14 sm:py-16" title="Final verdict: does retrofit increase house value?">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
@@ -255,13 +329,13 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
 
       <RelatedGuides
         links={[
-          { href: "/is-insulation-worth-it-ireland", label: "Is insulation worth it in Ireland?" },
+          { href: "/is-insulation-worth-it-ireland", label: "Does insulation add value in Ireland?" },
           { href: "/is-heat-pump-worth-it-ireland", label: "Is a heat pump worth it in Ireland?" },
           { href: "/is-solar-worth-it-ireland", label: "Is solar worth it in Ireland?" },
           { href: "/home-energy-upgrade-guide-ireland", label: "Home energy upgrade guide Ireland" },
-          { href: "/seai-grants-ireland-2026", label: "SEAI grants Ireland" },
+          { href: "/seai-grants-ireland-2026", label: "How grants affect upgrade value in Ireland" },
           { href: "/ber-assessment-ireland", label: "BER assessment Ireland" },
-          { href: "/heat-pump-cost-ireland", label: "Heat pump cost Ireland" }
+          { href: "/heat-pump-cost-ireland", label: "Heat pump cost vs value in Ireland" }
         ]}
       />
 
@@ -271,19 +345,19 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
             <FaqItem
               defaultOpen
               question="Does a higher BER rating increase house value in Ireland?"
-              answer="Often, yes. In Ireland, buyers use BER as a quick signal for likely heating costs, comfort, and future upgrade needs, so a stronger rating can make a property more appealing. It does not guarantee the same price uplift in every area, but it often improves saleability and can support a better resale outcome."
+              answer="Often, yes. In Ireland, buyers use BER as a quick signal for likely heating costs, comfort, and future upgrade needs. A stronger rating can make a property more appealing, but it does not guarantee the same price uplift in every area."
             />
             <FaqItem
               question="What upgrades add the most value to a home in Ireland?"
-              answer="The upgrades that add the most value are usually the ones that create a clear BER improvement and lower running costs in a practical way. In Ireland, that often means insulation, airtightness, heating controls, and in the right home a heat pump or similar efficient heating upgrade. Joined-up retrofit work usually adds more value than a single isolated measure."
+              answer="The upgrades most likely to add value are those that improve BER, reduce running costs, and are visible or meaningful to buyers. Insulation, airtightness improvements, heating upgrades, and solar can help when they fit the property and local market."
             />
             <FaqItem
               question="Is a heat pump good for resale value?"
-              answer="A heat pump can be good for resale value where the home is properly prepared for it, especially with good insulation and a solid BER outcome. In Ireland, buyers are more likely to value it when it is part of a well-executed upgrade rather than an expensive standalone change. The net cost after grants still matters when judging the overall return."
+              answer="A heat pump can support resale value when the home is ready for it, has good insulation, and the system reduces likely running costs. It may add less value if installed before heat loss issues are fixed."
             />
             <FaqItem
               question="Do buyers care about energy efficiency in Ireland?"
-              answer="Many do, and the issue has become more visible in Ireland as energy costs and retrofit awareness have increased. Buyers may not choose a home on BER alone, but they often use energy efficiency to compare similar properties and estimate future bills. That is one reason efficient homes can feel easier to sell."
+              answer="Yes. Buyers increasingly care about energy efficiency because it affects running costs, comfort, and future upgrade needs. BER is one of the clearest signals buyers can compare."
             />
           </div>
         </Reveal>
@@ -293,7 +367,7 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
         <Reveal>
           <div className="rounded-[1.1rem] border border-ink-200 bg-white px-6 py-8 shadow-soft sm:px-8 sm:py-10 lg:px-10">
             <h2 className="text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl">
-              Get a clear upgrade plan for your home
+              See which upgrades are actually worth it for your home
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-ink-600 sm:text-lg">
               Use the planner to understand which upgrades may matter most, what could improve BER and resale appeal, and how grants could shape
@@ -301,7 +375,7 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
               <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
-                Start planner
+                Check your upgrade plan
               </StartPlannerLink>
             </div>
           </div>
