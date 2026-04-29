@@ -10,12 +10,20 @@ import { Section } from "@/components/ui/section";
 import { grantGuideMetadata } from "@/lib/seo/grant-guide-metadata";
 import { pillarProseClass } from "@/lib/seo/pillar-page";
 
-export const metadata = grantGuideMetadata({
-  path: "/how-much-can-you-save-with-a-home-retrofit-ireland",
-  titleSegment: "How Much Can You Save With a Home Retrofit Ireland",
-  description:
-    "A practical guide to retrofit savings Ireland homeowners can realistically expect, including what drives savings and how upgrade order changes outcomes."
-});
+const pageTitle = "How Much Can You Save With a Home Retrofit in Ireland? Real Examples + Costs";
+const pageDescription =
+  "How much can you really save with a home retrofit in Ireland? See realistic savings by home type, BER, and upgrade path — before you spend.";
+
+export const metadata = {
+  ...grantGuideMetadata({
+    path: "/how-much-can-you-save-with-a-home-retrofit-ireland",
+    titleSegment: pageTitle,
+    description: pageDescription
+  }),
+  title: {
+    absolute: pageTitle
+  }
+};
 
 const linkClass =
   "font-medium text-brand-700 underline decoration-brand-700/30 underline-offset-4 transition hover:text-brand-800 hover:decoration-brand-800";
@@ -43,7 +51,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Which retrofit upgrade saves the most money?",
+      name: "Which retrofit upgrade actually saves the most money in Ireland?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "There is no single answer for every home, but fabric-first measures often create the strongest foundation for long-term savings."
@@ -109,14 +117,15 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <PillarPageHero
         eyebrow="SAVINGS GUIDE"
-        title="How much can you save with a home retrofit Ireland"
-        intro="Savings can come from lower heating bills, improved efficiency, and better system performance. The size of the saving depends on your home's starting condition and the upgrade path you choose."
+        title="How Much Can You Save With a Home Retrofit in Ireland?"
+        intro="Savings from a retrofit can vary hugely — from small bill reductions to major long-term savings. What you save depends on your home’s BER, upgrade order, and system choices. This guide shows realistic savings scenarios so you do not overestimate the return."
         summaryItems={[
-          "Savings vary depending on starting BER and fuel use",
-          "Bigger savings usually come from fabric-first upgrades",
-          "Comfort and running costs both matter"
+          "Savings depend on BER, fuel type, and upgrade order",
+          "Fabric-first upgrades usually create the strongest results",
+          "Heat pumps work best when the home is ready",
+          "Personal estimates are more useful than average figures"
         ]}
-        ctaLabel="Start planner"
+        ctaLabel="Estimate your savings for your home"
       />
 
       <Section className="py-14 sm:py-16" title="Quick answer">
@@ -129,6 +138,35 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
             In Ireland, retrofit outcomes vary widely because homes differ significantly in age, construction, and insulation levels. Savings are usually
             strongest when BER starting point, fuel type, and upgrade path are considered together, with insulation, airtightness, ventilation, and
             heating planned as one joined-up sequence.
+          </p>
+        </div>
+      </Section>
+
+      <Section className="py-14 sm:py-16" title="Typical retrofit savings in Ireland">
+        <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
+          <p>
+            Retrofit savings vary widely, but most homes fall into broad planning ranges depending on the starting condition and upgrade depth.
+          </p>
+          <ul className="list-disc space-y-2.5 pl-5">
+            <li>Light upgrades: €200–€600/year potential savings</li>
+            <li>Moderate upgrades: €600–€1,500/year potential savings</li>
+            <li>Deeper retrofit: €1,500–€3,000+/year potential savings</li>
+            <li>The biggest gains usually come when heat loss is fixed before heating upgrades</li>
+          </ul>
+          <p>
+            These are planning ranges, not guarantees. Your actual result depends on your home, energy use, BER starting point, and upgrade sequence.
+          </p>
+        </div>
+      </Section>
+
+      <Section className="py-6">
+        <div className={`max-w-3xl ${pillarProseClass}`}>
+          <p>
+            👉 Want a personalised estimate?{" "}
+            <Link className={linkClass} href="/planner">
+              Estimate your savings for your home
+            </Link>
+            .
           </p>
         </div>
       </Section>
@@ -227,7 +265,7 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <PillarPageTealCta
         heading="See what savings are realistic for your home"
         body="Build a realistic retrofit plan based on your home type, BER starting point, likely costs, grants, and upgrade path."
-        buttonLabel="Start planner"
+        buttonLabel="Get your savings estimate"
       />
 
       <Section className="py-14 sm:py-16" title="Why savings are not just about bills">
@@ -297,7 +335,7 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
               answer="Not always. They usually perform best when insulation, airtightness, and system design are handled correctly before installation."
             />
             <FaqItem
-              question="Which retrofit upgrade saves the most money?"
+              question="Which retrofit upgrade actually saves the most money in Ireland?"
               answer="There is no single answer for every home, but fabric-first measures often create the strongest foundation for long-term savings."
             />
             <FaqItem
@@ -336,7 +374,7 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
               <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
-                Start planner
+                Get your savings estimate
               </StartPlannerLink>
             </div>
           </div>
