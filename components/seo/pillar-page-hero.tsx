@@ -1,10 +1,11 @@
 import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
+import type { ReactNode } from "react";
 
 type PillarPageHeroProps = {
   eyebrow: string;
   title: string;
-  intro: string;
+  intro: ReactNode;
   summaryItems: readonly string[];
   ctaLabel?: string;
 };

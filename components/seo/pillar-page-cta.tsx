@@ -1,13 +1,14 @@
 import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
 import { ButtonLink } from "@/components/ui/button-link";
+import type { ReactNode } from "react";
 
 type PillarPageTealCtaProps = {
   heading: string;
   body: string;
   buttonLabel: string;
   buttonHref?: string;
-  reassurance?: string;
+  reassurance?: ReactNode;
 };
 
 export function PillarPageTealCta({

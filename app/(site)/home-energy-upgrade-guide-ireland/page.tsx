@@ -12,6 +12,12 @@ import { Section } from "@/components/ui/section";
 import { pillarProseClass } from "@/lib/seo/pillar-page";
 import { siteConfig } from "@/lib/site";
 
+const linkClass =
+  "font-medium text-brand-700 underline decoration-brand-700/30 underline-offset-4 transition hover:text-brand-800 hover:decoration-brand-800";
+
+const heroLinkClass =
+  "font-medium text-white underline decoration-white/45 underline-offset-4 transition hover:decoration-white";
+
 export const metadata: Metadata = {
   title: {
     absolute:
@@ -42,7 +48,15 @@ const overviewCards = [
 const upgradeAreas = [
   {
     title: "Attic and roof insulation",
-    body: "Often one of the quickest ways to cut heat loss, improve comfort, and reduce heating demand."
+    body: (
+      <>
+        Often one of the quickest ways to cut heat loss, improve comfort, and reduce heating demand. Check{" "}
+        <Link className={linkClass} href="/insulation-grants-ireland">
+          insulation grants in Ireland
+        </Link>{" "}
+        before you plan the work.
+      </>
+    )
   },
   {
     title: "Wall insulation",
@@ -50,24 +64,45 @@ const upgradeAreas = [
   },
   {
     title: "Windows and doors",
-    body: "Useful for tackling draughts and cold spots, particularly in older homes with poor glazing or leaky frames."
+    body: (
+      <>
+        Useful for tackling draughts and cold spots, particularly in older homes with poor glazing or leaky frames. See how{" "}
+        <Link className={linkClass} href="/windows-doors-grants-ireland">
+          windows and doors grants
+        </Link>{" "}
+        may apply.
+      </>
+    )
   },
   {
     title: "Heat pump upgrades",
-    body: "Best considered after heat loss is reviewed, so system sizing and performance are based on realistic home conditions."
+    body: (
+      <>
+        Best considered after heat loss is reviewed, so system sizing and performance are based on realistic home conditions. Compare likely{" "}
+        <Link className={linkClass} href="/heat-pump-cost-ireland">
+          heat pump costs
+        </Link>{" "}
+        before requesting quotes.
+      </>
+    )
   },
   {
     title: "Solar PV",
-    body: "Can reduce electricity bills and pair well with electrified heating, once core fabric priorities are addressed."
+    body: (
+      <>
+        Can reduce electricity bills and pair well with electrified heating, once core fabric priorities are addressed. Review{" "}
+        <Link className={linkClass} href="/solar-panel-grants-ireland">
+          solar panel grants
+        </Link>{" "}
+        if PV is on your shortlist.
+      </>
+    )
   },
   {
     title: "Deeper retrofit work",
     body: "Some properties need a coordinated package of fabric, heating, and ventilation upgrades rather than a single measure."
   }
 ] as const;
-
-const linkClass =
-  "font-medium text-brand-700 underline decoration-brand-700/30 underline-offset-4 transition hover:text-brand-800 hover:decoration-brand-800";
 
 export default function HomeEnergyUpgradeGuideIrelandPage() {
   return (
@@ -76,7 +111,15 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
         eyebrow="IRELAND GUIDE"
         title="Home Energy Upgrades Ireland: What to Do First (Most Homes Get This Wrong)"
         ctaLabel="Check your grant eligibility"
-        intro="Not sure where to start? Most Irish homes should fix heat loss first before upgrading heating or solar. Use the planner to see the right upgrade order for your home and what grants you could qualify for."
+        intro={
+          <>
+            Not sure where to start? Most Irish homes should fix heat loss first before upgrading heating or solar. Use the planner to see the right upgrade order for your home and what grants you could qualify for. See typical budgets in our{" "}
+            <Link className={heroLinkClass} href="/home-retrofit-cost-ireland">
+              home retrofit cost guide
+            </Link>
+            .
+          </>
+        }
         summaryItems={["Fix heat loss first (insulation + draughts)", "Plan heating and heat pump sizing", "Check SEAI routes with the planner"]}
       />
 
@@ -160,8 +203,8 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
       >
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            Start with the{" "}
-            <Link className={linkClass} href="/seai-grants-ireland-2026">
+            For a full grant breakdown, start with the{" "}
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
               SEAI grants overview for Ireland
             </Link>{" "}
             for the big picture on grant areas and sequencing. If you are mainly trying to work out whether support could apply to your
@@ -249,6 +292,15 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
         heading="Not sure what to do first for your home?"
         body="Use the planner to get a personalised upgrade order, see likely grants, and avoid costly mistakes like installing heating too early."
         buttonLabel="Check your grant eligibility"
+        reassurance={
+          <>
+            You can also{" "}
+            <Link className="font-medium text-white underline decoration-white/45 underline-offset-4 transition hover:decoration-white" href="/home-retrofit-cost-ireland">
+              explore typical upgrade costs
+            </Link>{" "}
+            before deciding your sequence.
+          </>
+        }
       />
 
       <Section title="What should you do first for your own home?">
@@ -269,18 +321,17 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
 
       <RelatedGuides
         links={[
-          { href: "/seai-grants-ireland-2026", label: "SEAI grants overview" },
-          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
-          { href: "/is-heat-pump-worth-it-ireland", label: "Is a heat pump worth it in Ireland?" },
-          { href: "/is-insulation-worth-it-ireland", label: "Is insulation worth it in Ireland?" },
-          { href: "/is-solar-worth-it-ireland", label: "Is solar worth it in Ireland?" },
-          { href: "/does-retrofit-increase-house-value-ireland", label: "Does retrofit increase house value in Ireland?" },
+          { href: "/home-retrofit-cost-ireland", label: "Home retrofit costs in Ireland" },
+          { href: "/home-retrofit-grants-ireland", label: "Home retrofit grants in Ireland" },
+          { href: "/what-to-upgrade-first-home-retrofit-ireland", label: "What to upgrade first in a home retrofit" },
           { href: "/ber-assessment-ireland", label: "BER assessment guide" },
+          { href: "/seai-grants-eligibility-ireland", label: "SEAI grants eligibility" },
           { href: "/heat-pump-cost-ireland", label: "Heat pump costs in Ireland" },
           { href: "/heat-pump-grants-ireland", label: "Heat pump grants" },
           { href: "/insulation-grants-ireland", label: "Insulation grants" },
           { href: "/solar-panel-grants-ireland", label: "Solar panel grants" },
-          { href: "/windows-doors-grants-ireland", label: "Windows and doors grants" }
+          { href: "/windows-doors-grants-ireland", label: "Windows and doors grants" },
+          { href: "/does-retrofit-increase-house-value-ireland", label: "Does retrofit increase house value in Ireland?" }
         ]}
       />
 
@@ -290,15 +341,39 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
             <FaqItem
               defaultOpen
               question="What is the best first home energy upgrade in Ireland?"
-              answer="In most Irish homes, reducing heat loss through insulation and draught-proofing is the best first step. This improves comfort and ensures later upgrades like heat pumps are sized correctly."
+              answer={
+                <>
+                  In most Irish homes, reducing heat loss through insulation and draught-proofing is the{" "}
+                  <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+                    best first upgrade
+                  </Link>
+                  . This improves comfort and ensures later upgrades like heat pumps are sized correctly.
+                </>
+              }
             />
             <FaqItem
               question="Should I install a heat pump before insulation?"
-              answer="No, insulation should usually come first. Installing a heat pump before improving insulation can lead to higher costs and inefficient system sizing."
+              answer={
+                <>
+                  No, insulation should usually come first. Installing a{" "}
+                  <Link className={linkClass} href="/heat-pump-cost-ireland">
+                    heat pump
+                  </Link>{" "}
+                  before improving insulation can lead to higher costs and inefficient system sizing.
+                </>
+              }
             />
             <FaqItem
               question="Can I get SEAI grants for multiple upgrades?"
-              answer="Yes, many SEAI grants can be combined across insulation, heating, and solar upgrades, depending on eligibility and your home's upgrade plan."
+              answer={
+                <>
+                  Yes, many{" "}
+                  <Link className={linkClass} href="/home-retrofit-grants-ireland">
+                    SEAI grants
+                  </Link>{" "}
+                  can be combined across insulation, heating, and solar upgrades, depending on eligibility and your home&apos;s upgrade plan.
+                </>
+              }
             />
             <FaqItem
               question="What order should home energy upgrades be done?"
