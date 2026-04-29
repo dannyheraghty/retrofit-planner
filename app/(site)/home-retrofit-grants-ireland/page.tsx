@@ -9,9 +9,9 @@ import { pillarProseClass } from "@/lib/seo/pillar-page";
 
 export const metadata = grantGuideMetadata({
   path: "/home-retrofit-grants-ireland",
-  titleSegment: "Home retrofit grants Ireland (complete guide)",
+  titleSegment: "2026 Home Retrofit Grants: €20k?",
   description:
-    "A practical guide to home retrofit grants in Ireland, including likely total support, eligibility basics, upgrade order, and links to key grant pages."
+    "Check if you qualify for €10k-€20k+ in 2026 home retrofit grants and see which upgrades unlock the biggest savings."
 });
 
 const linkClass =
@@ -74,28 +74,32 @@ export default function HomeRetrofitGrantsIrelandPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <PillarPageHero
         eyebrow="GRANTS GUIDE"
-        title="Home retrofit grants Ireland"
-        intro="Multiple retrofit grants are available in Ireland, and many homeowners combine them across insulation, heating, and other upgrades. Typical total support can be significant, but the key is understanding how grants fit together in the right sequence for your home."
+        title="Could You Get €10k–€20k+ in Retrofit Grants in Ireland (2026)?"
+        intro="Most Irish homeowners can claim €10,000–€20,000+ in SEAI grants in 2026. See what you qualify for, how much you can get, and the smartest upgrade path."
+        ctaLabel="Check your grant eligibility"
         summaryItems={[
-          "Multiple grants available depending on upgrades",
-          "Heat pump grant is often around EUR6,500",
-          "Grants reduce cost but do not remove upfront spend"
+          "€10,000–€20,000+ typical total grants",
+          "Heat pump grants up to €6,500+",
+          "Insulation and solar grants can be combined",
+          "Most homes qualify with the right upgrade path"
         ]}
       />
 
       <Section className="border-t border-ink-200" title="Quick answer">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p className="text-lg font-semibold leading-8 text-ink-900 sm:text-xl">
-            Most Irish homes can combine multiple retrofit grants, with total support often reaching
-            EUR10,000-EUR20,000+ depending on the upgrade path.
+            Most Irish homeowners can access €10,000–€20,000+ in retrofit grants in 2026, depending
+            on your home, BER rating, and upgrade plan. This page shows exactly how much you can get,
+            what affects your eligibility, and how to combine grants to maximise your total support
+            before speaking to SEAI or a contractor.
           </p>
           <ul className="list-disc space-y-2.5 pl-5">
-            <li>Total support can reach EUR10,000-EUR20,000+ depending on upgrades.</li>
-            <li>Most homes combine multiple grants, such as insulation and heating support.</li>
-            <li>The biggest factor is your starting BER and overall upgrade plan.</li>
+            <li>Combined support often reaches EUR10,000-EUR20,000+ on common retrofit paths.</li>
+            <li>Eligibility checkpoints: owner-occupied status, BER improvement, and assessment/technical readiness.</li>
+            <li>Upgrade order matters: follow fabric-first so grants stack correctly.</li>
           </ul>
           <p className="text-sm text-ink-500">
-            Based on typical SEAI supports and common retrofit upgrade paths in Ireland.
+            Based on published support levels and common upgrade combinations in Ireland.
           </p>
         </div>
       </Section>
@@ -160,7 +164,7 @@ export default function HomeRetrofitGrantsIrelandPage() {
       <PillarPageTealCta
         heading="Find your likely grants based on your home"
         body="Use the planner to estimate your likely grants based on your home type, BER starting point, and upgrade path."
-        buttonLabel="Start planner"
+        buttonLabel="Check your grant eligibility"
       />
 
       <Section className="border-t border-ink-200" title="Who is eligible for retrofit grants?">
@@ -245,7 +249,7 @@ export default function HomeRetrofitGrantsIrelandPage() {
       <PillarPageTealCta
         heading="Build your retrofit plan with grants included"
         body="Use the planner to combine upgrade order, likely costs, and available grants into one practical plan for your home."
-        buttonLabel="Start planner"
+        buttonLabel="Check your grant eligibility"
       />
     </>
   );

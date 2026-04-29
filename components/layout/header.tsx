@@ -32,7 +32,7 @@ export function Header() {
           size="sm"
           className="rounded-xl px-4 shadow-none hover:translate-y-0 hover:shadow-none hover:bg-[#ea580c] sm:px-5"
         >
-          Start planner
+          Check your grants
         </StartPlannerLink>
       </Container>
     </header>
