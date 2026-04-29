@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import { StartPlannerLink } from "@/components/analytics/start-planner-link";
 import { Reveal } from "@/components/home/reveal";
@@ -8,15 +9,20 @@ import { RelatedGuides } from "@/components/seo/related-guides";
 import { Card } from "@/components/ui/card";
 import { FaqItem } from "@/components/ui/faq-item";
 import { Section } from "@/components/ui/section";
-import { grantGuideMetadata } from "@/lib/seo/grant-guide-metadata";
 import { pillarProseClass } from "@/lib/seo/pillar-page";
+import { siteConfig } from "@/lib/site";
 
-export const metadata = grantGuideMetadata({
-  path: "/home-energy-upgrade-guide-ireland",
-  titleSegment: "Home Energy Upgrade Guide Ireland",
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "What Home Energy Upgrade Should You Do First in Ireland? (2026 Guide)"
+  },
   description:
-    "A practical home energy upgrade guide for Ireland. Learn which upgrades to prioritise, what SEAI grants may apply, and what to do first."
-});
+    "Most Irish homes should fix heat loss first—not install a heat pump. See the correct upgrade order, avoid costly mistakes, and check what grants you could qualify for.",
+  alternates: {
+    canonical: `${siteConfig.url}/home-energy-upgrade-guide-ireland`
+  }
+};
 
 const overviewCards = [
   {
@@ -68,9 +74,10 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
     <>
       <PillarPageHero
         eyebrow="IRELAND GUIDE"
-        title="Home Energy Upgrade Guide Ireland"
-        intro="Planning a home energy upgrade in Ireland can feel unclear: which works should come first, which grants may apply, and where costs can rise. This guide gives a practical sequence you can use before you commit."
-        summaryItems={["Compare key upgrade options", "Follow a practical upgrade order", "Use the planner to set priorities"]}
+        title="Home Energy Upgrades Ireland: What to Do First (Most Homes Get This Wrong)"
+        ctaLabel="Check your grant eligibility"
+        intro="Not sure where to start? Most Irish homes should fix heat loss first before upgrading heating or solar. Use the planner to see the right upgrade order for your home and what grants you could qualify for."
+        summaryItems={["Fix heat loss first (insulation + draughts)", "Plan heating and heat pump sizing", "Check SEAI routes with the planner"]}
       />
 
       <Section className="border-t border-ink-200 py-10 sm:py-12">
@@ -106,7 +113,10 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
       <Section title="What order should most homeowners consider upgrades in?">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-start lg:gap-10">
           <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
-            <p>For most homes, the safest route is to improve the building first, then upgrade systems.</p>
+            <p>
+              Do this first: reduce heat loss with insulation and draught control. When your building is tighter, later heating
+              and heat pump upgrades can be sized correctly instead of being oversized and inefficient.
+            </p>
             <ol className="list-decimal space-y-2.5 pl-5">
               <li>Reduce heat loss first with insulation and draught control, so later upgrades are not oversized or inefficient.</li>
               <li>Review heating next, when your heat demand is clearer and system choices are easier to compare.</li>
@@ -128,11 +138,19 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
             <div className="rounded-[1.1rem] border border-ink-200 bg-white px-5 py-6 shadow-soft sm:px-6 sm:py-7">
               <h3 className="text-base font-semibold text-ink-900">Why sequence matters</h3>
               <p className="mt-3 text-sm leading-7 text-ink-500">
-                The wrong order can lock in higher costs. The right order improves comfort sooner and avoids rework.
+                The wrong order can lock in higher costs. Get the fabric upgrades in first to avoid rework, improve comfort sooner,
+                and make sure later heating choices match your real heat demand.
               </p>
             </div>
           </Reveal>
         </div>
+        <p className={`mt-6 ${pillarProseClass}`}>
+          👉 Want to apply this to your own home?{" "}
+          <Link className={linkClass} href="/planner">
+            Check your grant eligibility
+          </Link>{" "}
+          and get your upgrade plan.
+        </p>
       </Section>
 
       <Section
@@ -228,22 +246,23 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
       </Section>
 
       <PillarPageTealCta
-        heading="Need a clearer starting point?"
-        body="Use the planner to prioritise upgrades for your home, understand likely grant routes, and avoid costly guesswork on what to do first."
-        buttonLabel="Start planner"
+        heading="Not sure what to do first for your home?"
+        body="Use the planner to get a personalised upgrade order, see likely grants, and avoid costly mistakes like installing heating too early."
+        buttonLabel="Check your grant eligibility"
       />
 
       <Section title="What should you do first for your own home?">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            The first step should reflect your own property. Two similar-looking homes can need very different upgrade paths.
+            The first move should be based on your property, not general advice. Two similar homes can need different priorities,
+            and the wrong first measure can waste money or force rework.
           </p>
           <p>
-            The most practical starting point is to{" "}
+            The most practical start is to{" "}
             <Link className={linkClass} href="/planner">
               start with the planner
             </Link>
-            , then use the grant guides above to validate specific measures.
+            , then use the relevant SEAI grant guides to validate your chosen measure before you book work.
           </p>
         </div>
       </Section>
@@ -271,19 +290,19 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
             <FaqItem
               defaultOpen
               question="What is the best first home energy upgrade in Ireland?"
-              answer="In many cases, reducing heat loss first is the most reliable starting point, but the best first measure depends on your home condition."
+              answer="In most Irish homes, reducing heat loss through insulation and draught-proofing is the best first step. This improves comfort and ensures later upgrades like heat pumps are sized correctly."
             />
             <FaqItem
               question="Should I install a heat pump before insulation?"
-              answer="Usually no. Most homes benefit from insulation and heat-loss improvements first, then heating upgrades once demand is lower."
+              answer="No, insulation should usually come first. Installing a heat pump before improving insulation can lead to higher costs and inefficient system sizing."
             />
             <FaqItem
-              question="Can I apply for more than one SEAI grant?"
-              answer="Often yes across different measures, but eligibility depends on current scheme rules and the works you complete. The SEAI grants eligibility guide explains what usually affects whether support may apply."
+              question="Can I get SEAI grants for multiple upgrades?"
+              answer="Yes, many SEAI grants can be combined across insulation, heating, and solar upgrades, depending on eligibility and your home's upgrade plan."
             />
             <FaqItem
-              question="How do I decide between insulation, heating, and solar?"
-              answer="Assess your home fabric first, then heating, then solar. The planner helps you map that sequence for your property."
+              question="What order should home energy upgrades be done?"
+              answer="A typical order is insulation first, then ventilation, followed by heating upgrades like heat pumps, and finally solar PV if suitable."
             />
           </div>
         </Reveal>
@@ -293,14 +312,14 @@ export default function HomeEnergyUpgradeGuideIrelandPage() {
         <Reveal>
           <div className="rounded-[1.1rem] border border-ink-200 bg-white px-6 py-8 shadow-soft sm:px-8 sm:py-10 lg:px-10">
             <h2 className="text-2xl font-semibold tracking-tight text-ink-900 sm:text-3xl">
-              Plan your next home energy steps with more clarity
+              See the best upgrade plan for your home
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-ink-600 sm:text-lg">
-              Use the planner to identify your best first upgrades, estimate likely grant routes, and build a realistic order of works for your home.
+              Get a personalised upgrade plan based on your home, see what grants you could qualify for, and avoid wasting money on the wrong upgrades.
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
               <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
-                Start planner
+                Check your grant eligibility
               </StartPlannerLink>
             </div>
           </div>
