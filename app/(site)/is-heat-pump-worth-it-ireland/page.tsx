@@ -81,11 +81,11 @@ export default function IsHeatPumpWorthItIrelandPage() {
             </Link>{" "}
             explains how insulation, heating, and grants fit together. For a sequencing checklist, see{" "}
             <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
-              what to upgrade before a heat pump
+              what to upgrade first
             </Link>
             . If you are weighing fabric work first, see{" "}
             <Link className={linkClass} href="/is-insulation-worth-it-ireland">
-              whether insulation is worth it
+              is insulation worth it
             </Link>
             .
           </p>
@@ -127,7 +127,11 @@ export default function IsHeatPumpWorthItIrelandPage() {
           <p>
             For more pricing context, see{" "}
             <Link className={linkClass} href="/heat-pump-cost-ireland">
-              the heat pump cost Ireland guide
+              heat pump cost in Ireland
+            </Link>
+            , and compare{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              home retrofit cost
             </Link>
             .
           </p>
@@ -143,7 +147,7 @@ export default function IsHeatPumpWorthItIrelandPage() {
           <p>
             Eligibility, readiness, and the wider project scope still matter. For more detail, review the{" "}
             <Link className={linkClass} href="/heat-pump-grants-ireland">
-              heat pump grants Ireland guide
+              heat pump grants in Ireland
             </Link>{" "}
             guide and the{" "}
             <Link className={linkClass} href="/seai-grants-ireland-2026">

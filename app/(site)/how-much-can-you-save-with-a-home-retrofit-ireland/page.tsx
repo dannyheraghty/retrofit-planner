@@ -131,9 +131,9 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <Section className="py-14 sm:py-16" title="Quick answer">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            Like{" "}
+            As with estimating{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
-              home retrofit costs in Ireland
+              retrofit cost before savings
             </Link>
             {", "}
             there is no single retrofit savings figure for every Irish home. In practice, outcomes can range from modest bill reductions to stronger

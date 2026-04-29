@@ -124,7 +124,14 @@ export default function WhatToUpgradeFirstHomeRetrofitIrelandPage() {
             The correct upgrade order for most Irish homes is: insulation and airtightness -&gt; ventilation -&gt; heating system (usually a heat
             pump) -&gt; windows and doors if needed -&gt; solar PV last.
           </p>
-          <p>This sequence reduces wasted spend, improves comfort sooner, and helps each upgrade perform properly.</p>
+          <p>
+            This sequence reduces wasted spend, improves comfort sooner, and helps each upgrade perform properly. For the wider planning context,
+            use the{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade guide
+            </Link>
+            .
+          </p>
           <div className="rounded-[1rem] border border-ink-200 bg-white px-5 py-5 shadow-soft sm:px-6">
             <ol className="list-decimal space-y-1.5 pl-5 text-sm leading-7 text-ink-700 sm:text-base">
               <li>Insulation and airtightness</li>
@@ -141,7 +148,12 @@ export default function WhatToUpgradeFirstHomeRetrofitIrelandPage() {
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <h3>1) Insulation and airtightness</h3>
           <p>
-            <strong>What it is:</strong> Upgrading attic, wall, and floor insulation where relevant, while reducing uncontrolled draughts.
+            <strong>What it is:</strong> Upgrading attic, wall, and floor insulation where relevant, while reducing uncontrolled draughts. If
+            this is your likely first step, it can also help to ask{" "}
+            <Link className={linkClass} href="/is-insulation-worth-it-ireland">
+              is insulation worth it
+            </Link>{" "}
+            before committing.
           </p>
           <p>
             <strong>Why now:</strong> It lowers heat demand first, so every later upgrade performs better.
@@ -153,7 +165,7 @@ export default function WhatToUpgradeFirstHomeRetrofitIrelandPage() {
           <p>
             Start with fabric basics first, then compare likely spend with the{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
-              home retrofit cost guide
+              home retrofit cost in Ireland
             </Link>{" "}
             so your budget matches the right sequence.
           </p>
@@ -189,7 +201,11 @@ export default function WhatToUpgradeFirstHomeRetrofitIrelandPage() {
             <Link className={linkClass} href="/seai-grants-ireland-2026">
               SEAI grants
             </Link>{" "}
-            before final sizing.
+            before final sizing. For broader funding context, compare{" "}
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
+              home retrofit grants in Ireland
+            </Link>
+            .
           </p>
 
           <h3>4) Windows and doors (if needed)</h3>
@@ -237,6 +253,11 @@ export default function WhatToUpgradeFirstHomeRetrofitIrelandPage() {
           </p>
           <p>
             Installing a heat pump before reducing heat loss can lead to a larger, more expensive system than the home actually needs.
+            Correct sequencing also affects likely{" "}
+            <Link className={linkClass} href="/how-much-can-you-save-with-a-home-retrofit-ireland">
+              retrofit savings
+            </Link>{" "}
+            over time.
           </p>
           <p>
             <strong>Comfort impact:</strong> Homes usually feel warmer and steadier sooner when draughts and heat loss are tackled before heating

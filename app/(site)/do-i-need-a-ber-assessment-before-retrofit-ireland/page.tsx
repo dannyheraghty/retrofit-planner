@@ -134,7 +134,14 @@ export default function DoINeedABerAssessmentBeforeRetrofitIrelandPage() {
           <p>
             BER stands for Building Energy Rating. It places your home on an A to G scale based on overall energy performance.
           </p>
-          <p>A BER assessment looks at key factors such as heat loss, insulation levels, heating system setup, and efficiency.</p>
+          <p>
+            A BER assessment looks at key factors such as heat loss, insulation levels, heating system setup, and efficiency. For the wider
+            background, see the{" "}
+            <Link className={linkClass} href="/ber-assessment-ireland">
+              BER assessment guide
+            </Link>
+            .
+          </p>
           <p>In Ireland, BER assessments are carried out by registered SEAI assessors.</p>
           <p>In Ireland, a BER assessment often costs around EUR150 to EUR300 depending on the home and assessor.</p>
           <ul className="list-disc space-y-2.5 pl-5">
@@ -228,6 +235,13 @@ export default function DoINeedABerAssessmentBeforeRetrofitIrelandPage() {
       <Section className="pt-2 sm:pt-3">
         <div className={`max-w-3xl ${pillarProseClass}`}>
           <p>If you want to understand your likely upgrades before booking a BER, use the planner to map your starting point.</p>
+          <p>
+            You can also compare your likely next steps with a broader{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade plan
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 
@@ -242,9 +256,13 @@ export default function DoINeedABerAssessmentBeforeRetrofitIrelandPage() {
           <p>
             If budget planning is your next step, compare likely spend with{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
-              home retrofit cost Ireland
+              home retrofit cost
             </Link>
-            , and if grant support matters, see{" "}
+            , and if grant support matters, check{" "}
+            <Link className={linkClass} href="/seai-grants-eligibility-ireland">
+              SEAI grant eligibility
+            </Link>{" "}
+            alongside{" "}
             <Link className={linkClass} href="/home-retrofit-grants-ireland">
               home retrofit grants Ireland
             </Link>

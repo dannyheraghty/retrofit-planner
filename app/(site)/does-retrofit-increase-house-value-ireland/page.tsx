@@ -270,6 +270,10 @@ export default function DoesRetrofitIncreaseHouseValueIrelandPage() {
             <Link className={linkClass} href="/seai-grants-ireland-2026">
               how grants affect upgrade value in Ireland
             </Link>
+            , the{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              retrofit cost vs value
+            </Link>
             , the probable BER improvement, and the wider home upgrade ROI Ireland rather than expecting a fixed resale uplift from every measure.
           </p>
         </div>

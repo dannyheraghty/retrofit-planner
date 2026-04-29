@@ -79,11 +79,15 @@ export default function IsInsulationWorthItIrelandPage() {
             <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
               home energy upgrade guide
             </Link>
-            . If you are comparing where heating or electricity upgrades fit after fabric work, also see{" "}
+            . For a more specific sequence, use{" "}
+            <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+              what to upgrade first
+            </Link>
+            . If you are comparing{" "}
             <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
-              whether a heat pump is worth it
+              heat pump readiness
             </Link>{" "}
-            and{" "}
+            or where electricity upgrades fit after fabric work, also see{" "}
             <Link className={linkClass} href="/is-solar-worth-it-ireland">
               whether solar is worth it
             </Link>
@@ -130,11 +134,11 @@ export default function IsInsulationWorthItIrelandPage() {
             The practical decision usually comes down to the upfront cost after grants, the likely improvement in comfort and bills, and whether
             the work supports other planned upgrades. For more detail on measures and support, see the{" "}
             <Link className={linkClass} href="/insulation-grants-ireland">
-              insulation grants Ireland guide
+              insulation grants in Ireland
             </Link>
             , and compare broader{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
-              whole-home retrofit cost ranges
+              home retrofit cost in Ireland
             </Link>
             .
           </p>

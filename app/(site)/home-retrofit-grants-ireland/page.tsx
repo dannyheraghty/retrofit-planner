@@ -258,9 +258,9 @@ export default function HomeRetrofitGrantsIrelandPage() {
             <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
               what to upgrade first
             </Link>
-            . For budget planning, see{" "}
+            . For budget planning, compare the{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
-              home retrofit cost Ireland
+              cost after grants
             </Link>
             . You can also consider whether the right sequence may{" "}
             <Link className={linkClass} href="/does-retrofit-increase-house-value-ireland">

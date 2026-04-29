@@ -86,6 +86,10 @@ export default function IsSolarWorthItIrelandPage() {
             <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
               home energy upgrade guide
             </Link>
+            . If you need a more specific sequence, see{" "}
+            <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+              what to upgrade first
+            </Link>
             . If you are still deciding whether to improve the building fabric before adding generation, see{" "}
             <Link className={linkClass} href="/is-insulation-worth-it-ireland">
               whether insulation is worth it
@@ -132,9 +136,14 @@ export default function IsSolarWorthItIrelandPage() {
           <p>
             This page is about decision-making rather than a full price breakdown. For grant context, see the{" "}
             <Link className={linkClass} href="/solar-panel-grants-ireland">
-              solar panel grants Ireland guide
+              solar panel grants in Ireland
             </Link>{" "}
-            and, if you want a more joined-up view of next steps, use the planner. If you are comparing grants more broadly, see the{" "}
+            and, if you are comparing{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              home retrofit cost
+            </Link>
+            {", "}
+            use the planner for a more joined-up view of next steps. If you are comparing grants more broadly, see the{" "}
             <Link className={linkClass} href="/seai-grants-ireland-2026">
               SEAI grants Ireland overview
             </Link>
@@ -178,7 +187,11 @@ export default function IsSolarWorthItIrelandPage() {
           </p>
           <p>
             That means payback is home-specific. Some homeowners focus on simple financial return, while others also value lower bills, more
-            predictable electricity costs, and producing some of their own power.
+            predictable electricity costs, and producing some of their own power. It can also help to compare solar with wider{" "}
+            <Link className={linkClass} href="/how-much-can-you-save-with-a-home-retrofit-ireland">
+              retrofit savings
+            </Link>
+            .
           </p>
         </div>
       </Section>
