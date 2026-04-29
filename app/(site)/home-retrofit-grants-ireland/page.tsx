@@ -89,9 +89,13 @@ export default function HomeRetrofitGrantsIrelandPage() {
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p className="text-lg font-semibold leading-8 text-ink-900 sm:text-xl">
             Most Irish homeowners can access €10,000–€20,000+ in retrofit grants in 2026, depending
-            on your home, BER rating, and upgrade plan. This page shows exactly how much you can get,
-            what affects your eligibility, and how to combine grants to maximise your total support
-            before speaking to SEAI or a contractor.
+            on your home, BER rating,{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              total retrofit costs
+            </Link>
+            , and upgrade plan. This page shows exactly how much you can get, what affects your
+            eligibility, and how to combine grants to maximise your total support before speaking to
+            SEAI or a contractor.
           </p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>Combined support often reaches EUR10,000-EUR20,000+ on common retrofit paths.</li>
@@ -110,7 +114,17 @@ export default function HomeRetrofitGrantsIrelandPage() {
         description="SEAI is the main grant provider for home energy upgrades, and support is usually spread across different upgrade types rather than one single payment."
       >
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
-          <p>Most homeowners combine multiple supports based on their home and upgrade path.</p>
+          <p>
+            Most homeowners combine multiple{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrades
+            </Link>{" "}
+            based on their home, upgrade path, and expected{" "}
+            <Link className={linkClass} href="/how-much-can-you-save-with-a-home-retrofit-ireland">
+              overall savings
+            </Link>
+            .
+          </p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>Insulation grants</li>
             <li>Heat pump grants</li>
@@ -124,7 +138,13 @@ export default function HomeRetrofitGrantsIrelandPage() {
         <div className={`max-w-3xl space-y-8 ${pillarProseClass}`}>
           <div className="border-b border-ink-200 pb-6">
             <h3 className="text-xl font-semibold tracking-tight text-ink-900">Heat pump grants</h3>
-            <p className="mt-2 text-ink-600">Typical support is often around EUR6,500, depending on eligibility and scheme rules.</p>
+            <p className="mt-2 text-ink-600">
+              Typical support is often around EUR6,500, while{" "}
+              <Link className={linkClass} href="/heat-pump-cost-ireland">
+                heat pump cost in Ireland
+              </Link>{" "}
+              still depends on eligibility and scheme rules.
+            </p>
             <p className="mt-2">
               <Link className={linkClass} href="/heat-pump-grants-ireland">
                 Heat pump grants Ireland
@@ -172,7 +192,13 @@ export default function HomeRetrofitGrantsIrelandPage() {
           <ul className="list-disc space-y-2.5 pl-5">
             <li>Owner-occupied homes are typically eligible for many grant types.</li>
             <li>Some landlords may be eligible depending on the scheme.</li>
-            <li>Minimum BER improvement is often required, especially for heat pump routes.</li>
+            <li>
+              A{" "}
+              <Link className={linkClass} href="/ber-assessment-ireland">
+                BER assessment
+              </Link>{" "}
+              is often needed where minimum BER improvement is required, especially for heat pump routes.
+            </li>
             <li>Technical requirements still need to be met before support is approved.</li>
           </ul>
         </div>
@@ -190,6 +216,10 @@ export default function HomeRetrofitGrantsIrelandPage() {
             </li>
             <li>
               Choose upgrades in a practical order using a{" "}
+              <Link className={linkClass} href="/planner">
+                retrofit plan
+              </Link>{" "}
+              and{" "}
               <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
                 what to upgrade first
               </Link>{" "}
@@ -231,6 +261,10 @@ export default function HomeRetrofitGrantsIrelandPage() {
             . For budget planning, see{" "}
             <Link className={linkClass} href="/home-retrofit-cost-ireland">
               home retrofit cost Ireland
+            </Link>
+            . You can also consider whether the right sequence may{" "}
+            <Link className={linkClass} href="/does-retrofit-increase-house-value-ireland">
+              increase house value
             </Link>
             .
           </p>
