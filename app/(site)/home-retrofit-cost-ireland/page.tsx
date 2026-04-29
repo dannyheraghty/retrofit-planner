@@ -12,9 +12,9 @@ import { pillarProseClass } from "@/lib/seo/pillar-page";
 
 export const metadata = grantGuideMetadata({
   path: "/home-retrofit-cost-ireland",
-  titleSegment: "Home Retrofit Cost Ireland",
+  titleSegment: "Home Retrofit Cost Ireland (2026 Guide) – €20k–€60k+ Breakdown",
   description:
-    "A practical guide to home retrofit cost Ireland homeowners can realistically expect, with clear ranges, cost breakdowns, and grant-adjusted budgets."
+    "How much does a home retrofit cost in Ireland? Most projects cost €20k–€60k+. See full breakdown, what affects cost, and how grants reduce what you pay."
 });
 
 const linkClass =
@@ -93,10 +93,10 @@ export default function HomeRetrofitCostIrelandPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <PillarPageHero
         eyebrow="COST GUIDE"
-        title="Home retrofit cost Ireland"
-        intro="Most homeowners planning a meaningful retrofit in Ireland should budget in the €20k-€60k+ range. This guide shows where that budget goes, what pushes costs up, and how grants reduce net spend."
+        title="Home Retrofit Cost Ireland: How Much Will You Pay? (€20k-€60k+ Guide)"
+        intro="Most home retrofits in Ireland cost between €20,000 and €60,000+, depending on your home, BER rating, and upgrade scope. This guide breaks down real cost ranges, what drives them, and how grants can reduce what you actually pay."
         summaryItems={["Most full projects fall in the €20k-€60k+ range", "Scope and BER starting point drive the final budget", "Grants reduce cost but do not remove upfront spend"]}
-        ctaLabel="Start planner"
+        ctaLabel="Estimate your retrofit cost"
       />
 
       <Section className="border-t border-ink-200 py-14 sm:py-16" title="At a glance">
@@ -112,7 +112,7 @@ export default function HomeRetrofitCostIrelandPage() {
 
       <Section className="py-14 sm:py-16" title="Quick answer">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
-          <p>€20k-€60k+ is the realistic planning range for most full retrofit projects in Ireland.</p>
+          <p>The typical home retrofit cost in Ireland is €20,000-€60,000+, depending on your home&apos;s size, BER rating, and upgrade scope.</p>
           <p>In practice, lower-BER and larger homes move toward the top end, while smaller phased plans sit toward the lower end.</p>
         </div>
       </Section>
@@ -121,7 +121,11 @@ export default function HomeRetrofitCostIrelandPage() {
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
             When homeowners search <strong>cost to retrofit house ireland</strong>, they are usually choosing between phased works and a full
-            package. These are the ranges most projects fall into:
+            package. A clear{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade plan
+            </Link>{" "}
+            helps you compare the ranges most projects fall into:
           </p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>
@@ -136,7 +140,11 @@ export default function HomeRetrofitCostIrelandPage() {
             </li>
           </ul>
           <p>
-            If your budget is tight, start with a light retrofit path and stage major system upgrades after the first BER and comfort gains.
+            If your budget is tight, start with a light retrofit path and use a clear{" "}
+            <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+              what to upgrade first
+            </Link>{" "}
+            sequence before staging major system upgrades.
           </p>
         </div>
       </Section>
@@ -146,13 +154,23 @@ export default function HomeRetrofitCostIrelandPage() {
           <p>Most full budgets are made up of these core components:</p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>
-              <strong>Insulation (basic):</strong> <strong>€3k-€10k</strong> for focused attic or cavity-style upgrades.
+              <strong>Insulation (basic):</strong> <strong>€3k-€10k</strong> for focused attic or cavity-style upgrades; the{" "}
+              <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+                home energy upgrade guide
+              </Link>{" "}
+              explains where these fit.
             </li>
             <li>
               <strong>Insulation (full upgrades):</strong> <strong>€10k-€20k+</strong> for deeper wall, airtightness, and wider fabric scope.
             </li>
             <li>
-              <strong>Heat pump:</strong> <strong>€12k-€20k before grant</strong>, typically <strong>€5k-€10k after grant</strong>.
+              <strong>
+                <Link className={linkClass} href="/heat-pump-cost-ireland">
+                  Heat pump cost in Ireland
+                </Link>
+                :
+              </strong>{" "}
+              <strong>€12k-€20k before grant</strong>, typically <strong>€5k-€10k after grant</strong>.
             </li>
             <li>
               <strong>Windows and doors:</strong> <strong>€8k-€15k</strong> typical.
@@ -175,24 +193,40 @@ export default function HomeRetrofitCostIrelandPage() {
       <PillarPageTealCta
         heading="Need a clearer retrofit budget for your home?"
         body="Use the planner to map your likely costs, check grant impact, and avoid expensive surprises."
-        buttonLabel="Start planner"
+        buttonLabel="Get your cost estimate"
       />
 
       <Section className="py-14 sm:py-16" title="What affects retrofit cost the most?">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>
-              <strong>BER starting point:</strong> homes in E, F, or G BER bands usually need deeper fabric and heating upgrades.
+              <strong>
+                <Link className={linkClass} href="/ber-assessment-ireland">
+                  BER starting point
+                </Link>
+                :
+              </strong>{" "}
+              homes in E, F, or G BER bands usually need deeper fabric and heating upgrades.
             </li>
             <li>
               <strong>House size and layout:</strong> larger floor area means more material, labour, and higher system capacity.
             </li>
             <li>
-              <strong>Upgrade scope:</strong> partial works and full retrofit packages are priced on completely different scales.
+              <strong>
+                <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+                  Upgrade scope
+                </Link>
+                :
+              </strong>{" "}
+              partial works and full retrofit packages are priced on completely different scales.
             </li>
           </ul>
           <p>
-            Actionable rule of thumb: if your BER starts in F or G, plan for mid-to-upper range budgets and stage works with a clear sequence.
+            Actionable rule of thumb: if your BER starts in F or G, use the{" "}
+            <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+              home energy upgrade guide
+            </Link>{" "}
+            to plan mid-to-upper range budgets and stage works with a clear sequence.
           </p>
           <p>
             If you are still sequencing decisions, use{" "}
@@ -211,7 +245,10 @@ export default function HomeRetrofitCostIrelandPage() {
       <Section className="py-14 sm:py-16" title="Grants and how they reduce your cost">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            Grants reduce cost meaningfully when your project is set up correctly. Use these planning numbers as a practical guide:
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
+              Home retrofit grants in Ireland
+            </Link>{" "}
+            can reduce cost meaningfully when your project is set up correctly. Use these planning numbers as a practical guide:
           </p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>
@@ -224,8 +261,8 @@ export default function HomeRetrofitCostIrelandPage() {
           </ul>
           <p>
             For current grant routes and eligibility, review{" "}
-            <Link className={linkClass} href="/seai-grants-ireland-2026">
-              SEAI grants Ireland
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
+              home retrofit grants Ireland
             </Link>{" "}
             before final budgeting.
           </p>
@@ -252,7 +289,7 @@ export default function HomeRetrofitCostIrelandPage() {
           <p>
             Compare outcomes in{" "}
             <Link className={linkClass} href="/does-retrofit-increase-house-value-ireland">
-              does retrofit increase house value
+              increase house value
             </Link>{" "}
             and measure-specific guides like{" "}
             <Link className={linkClass} href="/is-heat-pump-worth-it-ireland">
@@ -295,7 +332,15 @@ export default function HomeRetrofitCostIrelandPage() {
             />
             <FaqItem
               question="What does home retrofit cost in Ireland after grants?"
-              answer="Many projects that sit around €35k-€60k+ before grants still require roughly €25k-€45k+ net homeowner spend after grants. For heat pumps specifically, typical net ranges are often around €5k-€10k after grant."
+              answer={
+                <>
+                  Many projects that sit around €35k-€60k+ before grants still require roughly €25k-€45k+ net homeowner spend after{" "}
+                  <Link className={linkClass} href="/home-retrofit-grants-ireland">
+                    home retrofit grants
+                  </Link>
+                  . For heat pumps specifically, typical net ranges are often around €5k-€10k after grant.
+                </>
+              }
             />
             <FaqItem
               question="How much does a partial retrofit cost versus a full retrofit?"
@@ -307,7 +352,15 @@ export default function HomeRetrofitCostIrelandPage() {
             />
             <FaqItem
               question="How can I estimate my own retrofit cost more accurately?"
-              answer="Start with BER and home condition, define your scope clearly, then compare quotes measure-by-measure. The planner helps build that sequence before you commit."
+              answer={
+                <>
+                  Start with BER and home condition, define your scope clearly, then compare quotes measure-by-measure. The{" "}
+                  <Link className={linkClass} href="/home-energy-upgrade-guide-ireland">
+                    home energy upgrade guide
+                  </Link>{" "}
+                  helps build that sequence before you commit.
+                </>
+              }
             />
           </div>
         </Reveal>
@@ -324,7 +377,7 @@ export default function HomeRetrofitCostIrelandPage() {
             </p>
             <div className="mt-8 flex justify-center sm:justify-start">
               <StartPlannerLink href="/planner" size="lg" className="w-full justify-center sm:w-auto sm:min-w-[12rem]">
-                Start planner
+                Get your cost estimate
               </StartPlannerLink>
             </div>
           </div>
