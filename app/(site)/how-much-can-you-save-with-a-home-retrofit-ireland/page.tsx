@@ -131,7 +131,12 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <Section className="py-14 sm:py-16" title="Quick answer">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            There is no single retrofit savings figure for every Irish home. In practice, outcomes can range from modest bill reductions to stronger
+            Like{" "}
+            <Link className={linkClass} href="/home-retrofit-cost-ireland">
+              home retrofit costs in Ireland
+            </Link>
+            {", "}
+            there is no single retrofit savings figure for every Irish home. In practice, outcomes can range from modest bill reductions to stronger
             long-term savings, depending on the home and the plan.
           </p>
           <p>
@@ -145,7 +150,12 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <Section className="py-14 sm:py-16" title="Typical retrofit savings in Ireland">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            Retrofit savings vary widely, but most homes fall into broad planning ranges depending on the starting condition and upgrade depth.
+            Retrofit savings vary widely, even before factoring in{" "}
+            <Link className={linkClass} href="/home-retrofit-grants-ireland">
+              available SEAI grants
+            </Link>
+            {", "}
+            but most homes fall into broad planning ranges depending on the starting condition and upgrade depth.
           </p>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>Light upgrades: €200–€600/year potential savings</li>
@@ -197,7 +207,14 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <ul className="list-disc space-y-2.5 pl-5">
             <li>
-              <strong>Starting BER:</strong> Homes starting in lower BER bands often have stronger savings potential after upgrades.
+              <strong>
+                Starting{" "}
+                <Link className={linkClass} href="/ber-assessment-ireland">
+                  BER rating
+                </Link>
+                {":"}
+              </strong>{" "}
+              Homes starting in lower BER bands often have stronger savings potential after upgrades.
             </li>
             <li>
               <strong>Current fuel:</strong> Your present heating source (oil, gas, electricity, or solid fuel) changes how savings show up.
@@ -209,7 +226,11 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
               <strong>Insulation level:</strong> The weaker the fabric baseline, the more room there is for meaningful bill reduction.
             </li>
             <li>
-              <strong>Upgrade sequence:</strong> Fabric-first planning usually improves performance and reduces wasted spend.
+              <strong>Upgrade sequence:</strong> Knowing{" "}
+              <Link className={linkClass} href="/what-to-upgrade-first-home-retrofit-ireland">
+                what to upgrade first
+              </Link>{" "}
+              usually improves performance and reduces wasted spend.
             </li>
             <li>
               <strong>Partial vs full retrofit:</strong> Partial works can still cut costs, while full plans often deliver the biggest combined gain.
@@ -224,7 +245,11 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
             <h3>1) Older semi-detached home with high heat loss</h3>
             <p>
               <strong>Where savings come from:</strong> Reducing major heat loss first with insulation, airtightness, and ventilation, then upgrading
-              heating to match the improved fabric.
+              heating to match the improved fabric when you{" "}
+              <Link className={linkClass} href="/planner">
+                plan your upgrades properly
+              </Link>
+              {"."}
             </p>
             <p>
               <strong>Savings potential:</strong> Often the biggest upside, with meaningful running-cost reductions when starting inefficiency is high.
@@ -271,8 +296,12 @@ export default function HowMuchCanYouSaveWithAHomeRetrofitIrelandPage() {
       <Section className="py-14 sm:py-16" title="Why savings are not just about bills">
         <div className={`max-w-3xl space-y-4 ${pillarProseClass}`}>
           <p>
-            Many homeowners focus only on payback. In practice, retrofit value also comes from better comfort, more stable room temperatures, and lower
-            dependence on fuel price swings.
+            Many homeowners focus only on payback. In practice, retrofit value also comes from better comfort, more stable room temperatures, lower
+            dependence on fuel price swings, and the potential to{" "}
+            <Link className={linkClass} href="/does-retrofit-increase-house-value-ireland">
+              increase house value
+            </Link>
+            {"."}
           </p>
           <p>
             Retrofit planning can also make homes more suitable for systems like heat pumps and reduce the risk of costly rework later. For many homes,
