@@ -21,10 +21,10 @@ const heroLinkClass =
 export const metadata: Metadata = {
   title: {
     absolute:
-      "What Home Energy Upgrade Should You Do First in Ireland? (2026 Guide)"
+      "Home Energy Upgrade Guide Ireland: What to Do First (2026)"
   },
   description:
-    "Most Irish homes should fix heat loss first—not install a heat pump. See the correct upgrade order, avoid costly mistakes, and check what grants you could qualify for.",
+    "Not sure what to upgrade first? This Ireland guide shows the correct order to avoid costly mistakes and maximise grants.",
   alternates: {
     canonical: `${siteConfig.url}/home-energy-upgrade-guide-ireland`
   }

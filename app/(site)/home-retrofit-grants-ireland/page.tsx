@@ -9,9 +9,9 @@ import { pillarProseClass } from "@/lib/seo/pillar-page";
 
 export const metadata = grantGuideMetadata({
   path: "/home-retrofit-grants-ireland",
-  titleSegment: "2026 Home Retrofit Grants: €20k?",
+  titleSegment: "Home Retrofit Grants Ireland 2026: How Much Can You Get?",
   description:
-    "Check if you qualify for €10k-€20k+ in 2026 home retrofit grants and see which upgrades unlock the biggest savings."
+    "See how much you can get in home retrofit grants in Ireland for 2026, including typical amounts, eligibility, and which upgrades qualify."
 });
 
 const linkClass =

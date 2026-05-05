@@ -13,9 +13,9 @@ import { pillarProseClass } from "@/lib/seo/pillar-page";
 
 export const metadata = grantGuideMetadata({
   path: "/seai-grants-ireland-2026",
-  titleSegment: "SEAI Grants for Homeowners in Ireland (2026)",
+  titleSegment: "SEAI Grants Ireland 2026: What Homeowners Can Get",
   description:
-    "Understand SEAI grants for Irish homeowners in 2026, including heat pumps, insulation, solar panels, windows, and broader retrofit planning."
+    "See all SEAI grants available in Ireland in 2026, including heat pumps, insulation, solar, and what you may qualify for."
 });
 
 const overviewCards = [

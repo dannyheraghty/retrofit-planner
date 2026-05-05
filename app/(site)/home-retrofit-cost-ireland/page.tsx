@@ -12,9 +12,9 @@ import { pillarProseClass } from "@/lib/seo/pillar-page";
 
 export const metadata = grantGuideMetadata({
   path: "/home-retrofit-cost-ireland",
-  titleSegment: "Home Retrofit Cost Ireland (2026 Guide) – €20k–€60k+ Breakdown",
+  titleSegment: "Home Retrofit Cost Ireland: 2026 Prices (€20k–€60k+)",
   description:
-    "How much does a home retrofit cost in Ireland? Most projects cost €20k–€60k+. See full breakdown, what affects cost, and how grants reduce what you pay."
+    "Find realistic home retrofit costs in Ireland, what drives price, and how grants reduce what you actually pay."
 });
 
 const linkClass =
